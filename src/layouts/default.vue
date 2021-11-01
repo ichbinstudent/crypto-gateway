@@ -1,9 +1,13 @@
 <template>
   <v-app id="crypto-gateway">
     <v-app-bar app fixed>
-      <v-app-bar-title class="overflow-visible text-center mx-auto">
+      <v-app-bar-title class="overflow-visible">
         {{ route | capitalize }}
       </v-app-bar-title>
+      <v-spacer />
+      <v-app-bar-nav-icon @click="$router.back()">
+        <v-icon>mdi-arrow-left</v-icon>
+      </v-app-bar-nav-icon>
     </v-app-bar>
 
     <v-main>
@@ -12,12 +16,12 @@
 
     <v-container>
       <v-bottom-navigation
-        class="d-sm-none"
         color="primary"
         fixed
         grow
         active-class="nuxt-link-active"
         v-model="value"
+        id="bottom-bar"
       >
         <v-btn
           :to="{ name: 'wallet' }"
@@ -30,8 +34,6 @@
           <span>Wallet</span>
           <v-icon>mdi-wallet</v-icon>
         </v-btn>
-
-        <v-btn disabled height="0" width="0"></v-btn>
 
         <v-btn
           :to="{ name: 'settings' }"
@@ -96,5 +98,10 @@ div.v-app-bar-title__content {
   height: 0 !important;
   margin-top: auto !important;
   margin-bottom: auto !important;
+}
+
+#bottom-bar {
+  display: flex;
+  justify-content: space-around;
 }
 </style>
