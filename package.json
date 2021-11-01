@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "serve": "nuxt preview",
+    "dev": "nuxt",
     "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "start": "node .output/server/index.mjs"
+    "start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",

@@ -31,7 +31,7 @@
           <v-icon>mdi-wallet</v-icon>
         </v-btn>
 
-        <v-btn disabled height="0" width="16px"></v-btn>
+        <v-btn disabled height="0" width="0"></v-btn>
 
         <v-btn
           :to="{ name: 'settings' }"
@@ -53,7 +53,7 @@
         fab
         fixed
         :ripple="false"
-        class="bottom-4"
+        class="bottom-1"
         prefetch
       >
         <v-icon color="background">mdi-swap-vertical</v-icon>
@@ -87,6 +87,8 @@ div.v-app-bar-title__content {
 #floating-center-button {
   left: 50%;
   transform: translateX(-50%);
+  height: 3rem;
+  width: 3rem;
 }
 
 .nav-btn-custom {
