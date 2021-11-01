@@ -85,7 +85,22 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('coins/fetchCoins')
+    const t = 500
+
+    function rejectDelay(reason) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(reject.bind(null, reason), t)
+      })
+    }
+    const max = 5
+    let p = Promise.reject()
+
+    for (let i = 0; i < max; i++) {
+      p = p
+        .catch(() => this.$store.dispatch('coins/fetchCoins'))
+        .catch(rejectDelay)
+    }
+    // p = p.then(processResult).catch(errorHandler)
   },
 }
 </script>

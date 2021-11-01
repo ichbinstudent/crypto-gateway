@@ -23,18 +23,15 @@ export const mutations: MutationTree<State> = {
 
 export const actions: ActionTree<State, State> = {
   fetchCoins(context) {
-    return new Promise((resolve) => {
-      return CoinGeckoClient.coins.all().then((value: { data: Coin[] }) => {
-        context.commit('setCoins', value.data)
-        resolve(value.data)
-      })
-    }).catch(() => {
-      return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
+      try {
         return CoinGeckoClient.coins.all().then((value: { data: Coin[] }) => {
           context.commit('setCoins', value.data)
           resolve(value.data)
         })
-      })
+      } catch (e) {
+        reject(e)
+      }
     })
   },
   fetchCoinPrices(
