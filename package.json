@@ -15,12 +15,12 @@
     "@nuxtjs/vuetify": "^1.12.1",
     "core-js": "^3.15.1",
     "nuxt": "^2.15.8",
-    "imagekitio-vue": "^1.0.9",
-    "@nuxt/image": "^0.6.0"
+    "imagekitio-vue": "^1.0.9"
   },
   "devDependencies": {
     "@nuxt-hero-icons/outline": "^1.0.1",
     "@nuxt-hero-icons/solid": "^1.0.1",
+    "@nuxt/image": "^0.6.0",
     "@nuxt/nitro": "^0.10.0",
     "@nuxt/types": "^2.15.7",
     "@nuxt/typescript-build": "^2.1.0",
@@ -40,6 +40,6 @@
     "yarn": "^1.22.17"
   },
   "resolutions": {
-    "sharp": "0.28.0"
+    "sharp": "https://registry.npmjs.org/package-that-cannot-be-installed/-/package-that-cannot-be-installed-0.0.0.tgz"
   }
 }
