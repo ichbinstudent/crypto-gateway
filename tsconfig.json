@@ -28,7 +28,8 @@
       "@nuxtjs/moment",
       "@nuxtjs/axios",
       "@types/node",
-      "vuetify"
+      "vuetify",
+      "@nuxt/image"
     ]
   },
   "exclude": [

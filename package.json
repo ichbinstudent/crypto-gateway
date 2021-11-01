@@ -14,7 +14,9 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vuetify": "^1.12.1",
     "core-js": "^3.15.1",
-    "nuxt": "^2.15.8"
+    "nuxt": "^2.15.8",
+    "imagekitio-vue": "^1.0.9",
+    "@nuxt/image": "^0.6.0"
   },
   "devDependencies": {
     "@nuxt-hero-icons/outline": "^1.0.1",

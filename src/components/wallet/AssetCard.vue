@@ -9,7 +9,7 @@
   >
     <div class="flex flex-row align-middle">
       <v-avatar class="my-auto ml-0" rounded height="32" width="32">
-        <v-img
+        <nuxt-img
           max-height="32"
           max-width="32"
           alt="cryptocurrency icon"
