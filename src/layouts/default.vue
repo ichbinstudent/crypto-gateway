@@ -2,7 +2,7 @@
   <v-app id="crypto-gateway">
     <v-app-bar app fixed>
       <v-app-bar-title class="overflow-visible">
-        {{ route | capitalize }}
+        {{ route }}
       </v-app-bar-title>
       <v-spacer />
       <v-app-bar-nav-icon @click="$router.back()">
@@ -66,13 +66,22 @@
 
 <script>
 export default {
-  data: () => ({
-    drawer: false,
-    value: 'wallet',
-  }),
+  data() {
+    return {
+      drawer: false,
+      value: 'wallet',
+    }
+  },
   computed: {
     route() {
-      return this.$route.fullPath.split('/')[1] ?? 'home'
+      return (
+        this.$route.fullPath
+          .slice(1)
+          .split('?')[0]
+          .split('/')
+          .map((value) => this.$options.filters.capitalize(value))
+          .join(' > ') ?? 'home'
+      )
     },
   },
   created() {

@@ -50,6 +50,16 @@ export default Vue.extend({
       }
     }
   },
+  data() {
+    return {
+      coin: {} as Coin,
+    }
+  },
+  head() {
+    return {
+      title: `Wallet > ${(this as any).coin.name}`,
+    }
+  },
 })
 </script>
 

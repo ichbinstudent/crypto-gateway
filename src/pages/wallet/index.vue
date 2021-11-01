@@ -43,6 +43,11 @@ import AssetCard from '~/components/wallet/AssetCard.vue'
 
 export default Vue.extend({
   components: { AssetCard },
+  head() {
+    return {
+      title: 'Wallet',
+    }
+  },
   data: () => ({
     wallets: {
       crypto: [
