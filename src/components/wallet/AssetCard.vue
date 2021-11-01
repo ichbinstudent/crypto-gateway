@@ -1,6 +1,9 @@
 <template>
   <v-card
-    :to="{ name: 'wallet-currency', params: { currency: item.id } }"
+    :to="{
+      name: 'wallet' + (item.id ? '-currency' : ''),
+      params: { currency: item.id },
+    }"
     class="rounded-lg pr-1"
     rounded
   >
