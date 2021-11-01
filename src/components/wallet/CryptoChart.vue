@@ -56,7 +56,6 @@ export default Vue.extend({
       .then((value: number[][]) => {
         this.coinPrices = value
       })
-    console.log(this.vh)
   },
   props: {
     symbol: {
@@ -111,10 +110,10 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style lang="scss">
 .chart {
   margin-top: 28px;
-  //height: 15vh;
+  height: 25vh;
   width: 100vw;
 }
 

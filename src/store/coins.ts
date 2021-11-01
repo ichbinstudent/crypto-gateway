@@ -28,6 +28,13 @@ export const actions: ActionTree<State, State> = {
         context.commit('setCoins', value.data)
         resolve(value.data)
       })
+    }).catch(() => {
+      return new Promise((resolve) => {
+        return CoinGeckoClient.coins.all().then((value: { data: Coin[] }) => {
+          context.commit('setCoins', value.data)
+          resolve(value.data)
+        })
+      })
     })
   },
   fetchCoinPrices(
