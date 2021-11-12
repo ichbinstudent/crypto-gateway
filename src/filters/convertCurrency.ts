@@ -1,16 +1,19 @@
 import Vue from 'vue'
 import { Coin } from '~/types/coingecko'
+import { Decimal } from "decimal.js";
 
 export default ({ store }: any) => {
   Vue.filter(
     'convertCurrency',
     (
-      value: number | string,
+      value: number | string | Decimal,
       from: string,
       to: string = store.state.settings.currency
     ) => {
-      if (typeof value == 'string') {
+      if (typeof value === 'string') {
         value = Number.parseFloat(value)
+      } else if (typeof value !== 'number') {
+        value = value.toNumber()
       }
 
       const formatter = new Intl.NumberFormat('en-US', {

@@ -29,7 +29,8 @@
       "@nuxtjs/axios",
       "@types/node",
       "vuetify",
-      "@nuxt/image"
+      "@nuxt/image",
+      "@nuxtjs/auth-next"
     ]
   },
   "exclude": [

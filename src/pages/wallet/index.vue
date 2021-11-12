@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <h2 class="text-2xl mb-2">Fiat</h2>
-    <template v-if="wallets.fiat !== null">
+    <template v-if="fiat">
       <AssetCard
         :item="item"
-        v-for="(item, index) in wallets.fiat"
-        :key="item.currency"
-        :class="index + 1 === wallets.fiat.length ? '' : 'mb-2'"
+        v-for="(item, index) in fiat"
+        :key="item.coin.id"
+        :class="index + 1 === fiat.length ? '' : 'mb-2'"
       />
     </template>
     <template v-else>
@@ -18,12 +18,12 @@
       />
     </template>
     <h2 class="text-2xl my-2">Crypto</h2>
-    <template v-if="wallets.crypto !== null">
+    <template v-if="crypto">
       <AssetCard
         :item="item"
-        v-for="(item, index) in wallets.crypto"
-        :key="item.currency"
-        :class="index + 1 === wallets.crypto.length ? '' : 'mb-2'"
+        v-for="(item, index) in crypto"
+        :key="item.coin.id"
+        :class="index + 1 === crypto.length ? '' : 'mb-2'"
       />
     </template>
     <template v-else>
@@ -40,6 +40,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import AssetCard from '~/components/wallet/AssetCard.vue'
+import { Wallet } from "~/types/interfaces";
+
 
 export default Vue.extend({
   components: { AssetCard },
@@ -48,41 +50,18 @@ export default Vue.extend({
       title: 'Wallet',
     }
   },
-  data: () => ({
-    wallets: {
-      crypto: [
-        {
-          id: 'bitcoin',
-          symbol: 'btc',
-          name: 'Bitcoin',
-          amount: 0.003123,
-        },
-        {
-          id: 'ethereum',
-          symbol: 'eth',
-          name: 'Ethereum',
-          amount: 0.6432,
-        },
-        {
-          id: 'cardano',
-          symbol: 'ada',
-          name: 'Cardano',
-          amount: 144.424,
-        },
-      ],
-      fiat: [
-        {
-          symbol: 'eur',
-          name: 'Euro',
-          amount: 113.31,
-        },
-        {
-          symbol: 'xaf',
-          name: 'Franc CFA',
-          amount: 5902.31,
-        },
-      ],
+  computed: {
+    crypto() {
+      console.log(this.$store.getters["wallet/wallet"]["ripple"])
+      return Object.keys(this.$store.getters["wallet/wallet"])
+        .filter((key: string) => !["eur", "xaf"].includes(key))
+        .map((key: string) => this.$store.getters["wallet/wallet"][key])
     },
-  }),
+    fiat() {
+      return Object.keys(this.$store.getters["wallet/wallet"])
+        .filter((key: string) => ["eur", "xaf"].includes(key))
+        .map((key: string) => this.$store.getters["wallet/wallet"][key])
+    },
+  },
 })
 </script>

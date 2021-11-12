@@ -1,21 +1,25 @@
-import Vue from 'vue'
+import Vue from "vue";
+import { Decimal } from "decimal.js";
 
 export default () => {
-  Vue.filter('formatCurrency', (value: number | string, symbol: string) => {
-    if (typeof value == 'string') {
-      value = Number.parseFloat(value)
+  Vue.filter("formatCurrency", (value: number | string | Decimal, symbol: string) => {
+    if (typeof value == "string") {
+      value = Number.parseFloat(value);
+    } else if (typeof value !== "number") {
+      value = value.toNumber();
     }
-    const formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
+
+    const formatter = new Intl.NumberFormat("en-US", {
+      style: "currency",
       currency: symbol,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    })
+      minimumFractionDigits: 4,
+      maximumFractionDigits: 8
+    });
 
     if (value === 0) {
-      return '0'
+      return "0";
     }
 
-    return formatter.format(value)
-  })
+    return formatter.format(value);
+  });
 }

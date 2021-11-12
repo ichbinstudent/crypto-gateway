@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="w-full fixed top-16" id="fixed-bg-item">
-      <CryptoChart :symbol="coin.id" :days="1"></CryptoChart>
+      <CryptoChart v-if="!fiat" :symbol="coin.id" :days="1"></CryptoChart>
+      <v-sheet v-else height="28vh" class="mb-1" color="transparent" ></v-sheet>
       <v-row dense class="mt-0 mx-0">
         <v-col>
           <v-btn class="rounded-lg" block depressed
@@ -38,9 +39,9 @@ import { Coin } from '~/types/coingecko'
 export default Vue.extend({
   components: { TransactionList, CryptoChart },
   async asyncData({ params, store }) {
-    const coin = store.getters['coins/coins']?.filter(
+    const coin = store.getters['coins/coins']?.find(
       (coin: Coin) => coin.id == params.currency
-    )[0]
+    )
     if (coin) {
       return { coin }
     } else {
@@ -60,6 +61,11 @@ export default Vue.extend({
       title: `Wallet > ${(this as any).coin.name}`,
     }
   },
+  computed: {
+    fiat(): boolean {
+      return ['eur', 'xaf'].includes(this.$route.params.currency)
+    }
+  }
 })
 </script>
 

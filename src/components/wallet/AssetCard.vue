@@ -1,52 +1,62 @@
 <template>
   <v-card
     :to="{
-      name: 'wallet' + (item.id ? '-currency' : ''),
-      params: { currency: item.id },
+      name: 'wallet' + (item.coin.id ? '-currency' : ''),
+      params: { currency: item.coin.id },
     }"
     class="rounded-lg pr-1"
     rounded
   >
     <div class="flex flex-row align-middle">
       <v-avatar class="my-auto ml-0" rounded height="32" width="32">
-        <nuxt-img
+        <v-img
+          v-if="item.coin.image.large.includes('coingecko')"
           max-height="32"
           max-width="32"
           alt="cryptocurrency icon"
-          :src="'/crypto-icons/128/color/' + item.symbol + '.png'"
+          :src="item.coin.image.large"
         />
+        <nuxt-img
+          v-else-if="true"
+          max-height="32"
+          max-width="32"
+          alt="cryptocurrency icon"
+          :src="item.coin.image.large"
+        />
+        <v-skeleton-loader height="32" width="32" v-else type="avatar" />
       </v-avatar>
       <v-card-title class="w-full text-no-wrap text-left pl-0 text-xs">
-        <span class="text-sm -mt-1 tracking-tight">{{ item.name }}</span>
+        <span class="text-sm -mt-1 tracking-tight">{{ item.coin.name }}</span>
       </v-card-title>
       <div class="flex flex-col my-auto text-right">
-        <span v-if="coinsLoaded" class="text-sm">{{
-          item.amount | convertCurrency(item.symbol)
-        }}</span>
-        <v-skeleton-loader v-else type="text"></v-skeleton-loader>
-        <span class="text-xs">{{
-          item.amount | formatCurrency(item.symbol)
-        }}</span>
+        <span class="text-sm">{{
+            item.amount | convertCurrency(item.coin.symbol)
+          }}</span>
+        <span class="text-xs">
+          {{ item.amount | formatCurrency(item.coin.symbol) }}</span>
       </div>
     </div>
   </v-card>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-import { Coin } from '~/types/coingecko'
+import Vue from "vue";
+import { WalletEntry } from "~/types/interfaces";
 
 export default Vue.extend({
   props: {
     item: {
       required: true,
-      type: Object as () => { value: number } & Coin,
-    },
+      type: Object as () => WalletEntry
+    }
   },
-  computed: {
-    coinsLoaded(): boolean {
-      return this.$store.getters['coins/coins'].length !== 0
-    },
-  },
-})
+  computed: {}
+});
 </script>
+
+<style>
+.v-skeleton-loader__avatar {
+  height: 32px !important;
+  width: 32px !important;
+}
+</style>

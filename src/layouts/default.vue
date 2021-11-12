@@ -11,6 +11,7 @@
     </v-app-bar>
 
     <v-main>
+      <Snackbar />
       <Nuxt />
     </v-main>
 
@@ -58,7 +59,7 @@
         class="bottom-1"
         prefetch
       >
-        <v-icon color="background">mdi-swap-vertical</v-icon>
+        <v-icon color="background">mdi-swap-horizontal</v-icon>
       </v-btn>
     </v-container>
   </v-app>
@@ -69,40 +70,44 @@ export default {
   data() {
     return {
       drawer: false,
-      value: 'wallet',
-    }
+      value: "wallet"
+    };
   },
   computed: {
     route() {
       return (
         this.$route.fullPath
           .slice(1)
-          .split('?')[0]
-          .split('/')
+          .split("?")[0]
+          .split("/")
           .map((value) => this.$options.filters.capitalize(value))
-          .join(' > ') ?? 'home'
-      )
-    },
+          .join(" > ") ?? "home"
+      );
+    }
   },
   created() {
-    const t = 500
+    const t = 1000;
 
     function rejectDelay(reason) {
-      return new Promise(function (resolve, reject) {
-        setTimeout(reject.bind(null, reason), t)
-      })
+      return new Promise(function(resolve, reject) {
+        setTimeout(reject.bind(null, reason), t);
+      });
     }
-    const max = 5
-    let p = Promise.reject()
+
+    const max = 5;
+    let p = Promise.reject();
 
     for (let i = 0; i < max; i++) {
       p = p
-        .catch(() => this.$store.dispatch('coins/fetchCoins'))
-        .catch(rejectDelay)
+        .catch(() => {
+          this.$store.dispatch("coins/fetchCoins")
+            .then(() => this.$store.dispatch("wallet/updateWallet"));
+        })
+        .catch(rejectDelay);
     }
     // p = p.then(processResult).catch(errorHandler)
-  },
-}
+  }
+};
 </script>
 
 <style lang="scss">
