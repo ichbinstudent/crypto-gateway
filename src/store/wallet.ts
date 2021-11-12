@@ -30,7 +30,6 @@ export const mutations: MutationTree<State> = {
 };
 
 function addIfMissing(wallet: Wallet, transaction: Transaction, coin_in: Coin, coin_out: Coin) {
-  console.log(transaction.polymorphic_ctype);
   switch (transaction.polymorphic_ctype) {
     case TransactionTypes.Deposit:
       if (!wallet[transaction.currency_out]) {
@@ -109,7 +108,6 @@ export const actions: ActionTree<State, State> = {
             // }
           });
           context.commit("setWallet", wallet);
-          console.log(wallet);
           return resolve(wallet);
         })
         .catch(e => reject(e));

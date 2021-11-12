@@ -52,7 +52,6 @@ export default Vue.extend({
   },
   computed: {
     crypto() {
-      console.log(this.$store.getters["wallet/wallet"]["ripple"])
       return Object.keys(this.$store.getters["wallet/wallet"])
         .filter((key: string) => !["eur", "xaf"].includes(key))
         .map((key: string) => this.$store.getters["wallet/wallet"][key])
