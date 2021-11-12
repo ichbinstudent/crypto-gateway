@@ -1,6 +1,7 @@
 import { Moment } from 'moment'
 import { Coin } from "~/types/coingecko";
 import { Decimal } from 'decimal.js';
+import { TransactionTypes } from "~/types/ctypes";
 
 export interface Transaction {
   id: number
