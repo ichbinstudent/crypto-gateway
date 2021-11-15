@@ -1,38 +1,51 @@
 <template>
-  <v-list two-line dense>
+  <v-list two-line dense class="pa-0">
     <template v-for="item in items">
       <v-subheader
         v-if="item.header"
         :key="item.id"
         v-text="$options.filters.date(item.header)"
-      ></v-subheader>
+      />
 
-      <v-list-item v-else :key="item.id">
-        <v-list-item-avatar>
+      <v-list-item :key="item.id" class="px-1" v-else>
+        <v-list-item-avatar class="my-0 mr-1" color="surface">
           <v-icon
-            v-if="item.polymorphic_ctype === TransactionTypes.Withdrawal"
+            v-if="item.resourcetype === 'Withdrawal'"
             color="red"
-          >mdi-arrow-up</v-icon>
+          >mdi-arrow-up
+          </v-icon>
           <v-icon
-            v-else-if="item.polymorphic_ctype === TransactionTypes.Deposit"
+            v-else-if="item.resourcetype === 'Deposit'"
             color="blue"
-          >mdi-arrow-down</v-icon>
+          >mdi-arrow-down
+          </v-icon>
           <v-icon
-            v-else-if="item.polymorphic_ctype === TransactionTypes.Swap"
+            v-else-if="item.resourcetype === 'Swap'"
             color="blue"
-          >mdi-swap-horizontal</v-icon>
+          >mdi-swap-horizontal
+          </v-icon>
         </v-list-item-avatar>
 
-        <v-list-item-content>
-          <v-list-item-title>
-            {{ item.polymorphic_ctype === TransactionTypes.Swap && item.currency_in === coin.id ? '-' : '+' }}
-            {{item.amount_out | formatCurrency(coin.symbol) }}
+        <v-list-item-content class="py-0">
+          <v-list-item-title class="flex flex-row">
+            <span>
+            {{ item.resourcetype === "Swap" && item.currency_in === coin.id ? "-" : "+" }}
+            {{
+                (item.resourcetype === "Swap" && item.currency_in === coin.id ? item.amount_in : item.amount_out) | formatCurrency(coin.symbol)
+              }}
+            </span>
           </v-list-item-title>
-          <v-list-item-subtitle
-            v-html="item.timestamp.format('LLL')"
-          ></v-list-item-subtitle>
+          <v-list-item-subtitle>
+            <span class="text-sm">
+            {{ item.timestamp.format("lll") }}
+            </span>
+          </v-list-item-subtitle>
         </v-list-item-content>
+        <v-chip outlined :color="colors[item.status]" x-small class="absolute right-0 flex-shrink">
+          {{ item.status }}
+        </v-chip>
       </v-list-item>
+      <v-divider />
     </template>
   </v-list>
 </template>
@@ -54,7 +67,8 @@ export default Vue.extend({
   computed: {
     transactions(): Transaction[] {
       return this.$store.getters["wallet/transactions"]
-        .filter((value: Transaction) => value.currency_out === this.coin.id || value.currency_in === this.coin.id);
+        .filter((value: Transaction) => (value.currency_out === this.coin.id || value.currency_in === this.coin.id) &&
+          (value.resourcetype !== "Swap" || value.status !== "PENDING"));
     },
     items(): ({ header: Moment } | Transaction)[] {
       if (this.transactions.length === 0) return [];
@@ -74,6 +88,13 @@ export default Vue.extend({
       return items;
     }
   },
-  data: () => ({ TransactionTypes })
+  data: () => ({
+    TransactionTypes,
+    colors: {
+      PENDING: "orange",
+      ERROR: "red",
+      COMPLETED: "green"
+    }
+  })
 });
 </script>

@@ -25,7 +25,7 @@
         id="bottom-bar"
       >
         <v-btn
-          :to="{ name: 'wallet' }"
+          :to="localeLocation({ name: 'wallet' })"
           value="wallet"
           icon
           class="nav-btn-custom"
@@ -37,7 +37,7 @@
         </v-btn>
 
         <v-btn
-          :to="{ name: 'settings' }"
+          :to="localeLocation({ name: 'settings' })"
           value="settings"
           icon
           class="nav-btn-custom"
@@ -50,7 +50,7 @@
       </v-bottom-navigation>
 
       <v-btn
-        :to="{ name: 'gateway' }"
+        :to="localeLocation({ name: 'swap' })"
         color="primary"
         id="floating-center-button"
         fab

@@ -30,7 +30,7 @@
         </v-form>
 
         <v-responsive class="text-center mt-2 text-body-2">
-          <nuxt-link :to="({name: 'auth'})">
+          <nuxt-link :to="localeLocation({name: 'auth'})">
             Go back to login
           </nuxt-link>
         </v-responsive>

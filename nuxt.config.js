@@ -65,6 +65,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
     // https://go.nuxtjs.dev/pwa
+    "@nuxtjs/i18n",
     "@nuxtjs/pwa",
     "@nuxt/image",
     "@nuxtjs/auth-next"
@@ -77,6 +78,19 @@ export default {
 
   router: {
     middleware: ["auth"]
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', iso: 'en-US', file: 'en.js' },
+      { code: 'fr', iso: 'fr-FR', file: 'fr.js' },
+    ],
+    langDir: '~/locales',
+    lazy: true,
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+    }
   },
 
   auth: {

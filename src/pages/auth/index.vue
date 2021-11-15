@@ -118,7 +118,7 @@
       </v-card-text>
 
       <div class="text-center mt-2 text-body-2">
-        <nuxt-link :to="({name: 'auth-reset'})">
+        <nuxt-link :to="localeLocation({name: 'auth-reset'})">
           Forgot your password?
         </nuxt-link>
       </div>

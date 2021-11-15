@@ -1,21 +1,38 @@
-import { Moment } from 'moment'
+import { Moment } from "moment";
 import { Coin } from "~/types/coingecko";
-import { Decimal } from 'decimal.js';
+import { Decimal } from "decimal.js";
 import { TransactionTypes } from "~/types/ctypes";
 
 export interface Transaction {
-  id: number
+  id: number;
   // currency: string
   // direction: 'in' | 'out'
   // amount: string
 
-  timestamp: Moment
-  amount_in: string
-  amount_out: string
-  currency_in: string
-  currency_out: string
-  status: 'PENDING' | 'COMPLETED' | 'ERROR'
-  polymorphic_ctype: TransactionTypes
+  timestamp: Moment;
+  amount_in: Decimal;
+  amount_out: Decimal;
+  currency_in: string;
+  currency_out: string;
+  status: "PENDING" | "COMPLETED" | "ERROR";
+  polymorphic_ctype: TransactionTypes;
+  resourcetype: "Deposit" | "Swap" | "Withdrawal";
+  fees: Decimal;
+}
+
+export interface Withdrawal extends Transaction {
+  destination_address?: string;
+  network: string;
+  transaction_hash?: string;
+}
+
+export interface Deposit extends Transaction {
+  destination_address?: string;
+  transaction_hash?: string;
+}
+
+export interface Swap extends Transaction {
+
 }
 
 export interface WalletEntry {
@@ -24,7 +41,7 @@ export interface WalletEntry {
 }
 
 export interface Wallet {
-  [key: string]: WalletEntry
+  [key: string]: WalletEntry;
 }
 
 export interface Snack {

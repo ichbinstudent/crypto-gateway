@@ -27,6 +27,7 @@
       "@nuxt/types",
       "@nuxtjs/moment",
       "@nuxtjs/axios",
+      "@nuxtjs/i18n",
       "@types/node",
       "vuetify",
       "@nuxt/image",

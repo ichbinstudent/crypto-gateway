@@ -2,7 +2,7 @@ import { GetterTree, MutationTree } from 'vuex'
 
 export const state = () => ({
   theme: 'light',
-  currency: 'usd',
+  currency: 'xaf',
   signupStep: 0,
   signupPhone: ''
 })

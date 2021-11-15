@@ -1,9 +1,9 @@
 <template>
   <v-card
-    :to="{
+    :to="localeLocation({
       name: 'wallet' + (item.coin.id ? '-currency' : ''),
       params: { currency: item.coin.id },
-    }"
+    })"
     class="rounded-lg pr-1"
     rounded
   >
@@ -17,23 +17,23 @@
           :src="item.coin.image.large"
         />
         <nuxt-img
-          v-else-if="true"
-          max-height="32"
-          max-width="32"
+          v-else
+          height="32"
+          width="32"
           alt="cryptocurrency icon"
           :src="item.coin.image.large"
         />
-        <v-skeleton-loader height="32" width="32" v-else type="avatar" />
       </v-avatar>
-      <v-card-title class="w-full text-no-wrap text-left pl-0 text-xs">
+      <v-card-title class="text-no-wrap text-left px-0 text-xs">
         <span class="text-sm -mt-1 tracking-tight">{{ item.coin.name }}</span>
       </v-card-title>
-      <div class="flex flex-col my-auto text-right">
-        <span class="text-sm">{{
-            item.amount | convertCurrency(item.coin.symbol)
-          }}</span>
+      <div class="w-auto flex flex-col whitespace-nowrap my-auto text-right">
+        <span class="text-sm">
+          {{ item.amount | convertCurrency(item.coin.symbol) }}
+        </span>
         <span class="text-xs">
-          {{ item.amount | formatCurrency(item.coin.symbol) }}</span>
+          {{ item.amount | formatCurrency(item.coin.symbol) }}
+        </span>
       </div>
     </div>
   </v-card>
