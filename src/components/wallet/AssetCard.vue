@@ -51,8 +51,8 @@ import { WalletEntry } from "~/types/interfaces";
 export default Vue.extend({
   props: {
     item: {
-      required: true,
-      type: Object as () => WalletEntry
+      required: false,
+      type: Object as () => WalletEntry | undefined
     }
   },
   computed: {}

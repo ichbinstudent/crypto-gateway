@@ -1,5 +1,7 @@
 export default {
   srcDir: "./src",
+  target: "static",
+  mode: "spa",
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -36,6 +38,8 @@ export default {
     { src: "~/filters/convertCurrency.ts" },
     { src: "~/filters/markdown.ts" },
     { src: "~/filters/date.ts" },
+    // plugins
+    { src: "~/plugins/convertCurrency.ts" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -82,22 +86,22 @@ export default {
 
   i18n: {
     locales: [
-      { code: 'en', iso: 'en-US', file: 'en.js' },
-      { code: 'fr', iso: 'fr-FR', file: 'fr.js' },
+      { code: "en", iso: "en-US", file: "en.js" },
+      { code: "fr", iso: "fr-FR", file: "fr.js" }
     ],
-    langDir: '~/locales',
+    langDir: "~/locales",
     lazy: true,
-    defaultLocale: 'en',
+    defaultLocale: "en",
     vueI18n: {
-      fallbackLocale: 'en',
+      fallbackLocale: "en"
     }
   },
 
   auth: {
     redirect: {
-      login: '/auth',
-      logout: '/auth',
-      home: '/wallet'
+      login: "/auth",
+      logout: "/auth",
+      home: "/wallet"
     },
     strategies: {
       custom: {
@@ -169,7 +173,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BASE_URL ?? 'http://localhost:8000/api', // Used as fallback if no runtime config is provided
+    baseURL: process.env.BASE_URL ?? "http://localhost:8000/api" // Used as fallback if no runtime config is provided
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

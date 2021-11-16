@@ -11,9 +11,9 @@ export default ({ store }: any) => {
       to: string = store.state.settings.currency
     ) => {
       if (typeof value === 'string') {
-        value = Number.parseFloat(value)
-      } else if (typeof value !== 'number') {
-        value = value.toNumber()
+        value = new Decimal(value)
+      } else if (typeof value === 'number') {
+        value = new Decimal(value)
       }
 
       const formatter = new Intl.NumberFormat('en-US', {
@@ -24,20 +24,20 @@ export default ({ store }: any) => {
       })
 
       if (to === 'xaf') {
-        value *= 655.29
+        value = value.mul(655.29)
         to = 'eur'
       }
 
       if (from === 'xaf' && to === 'eur') {
-        value /= 655.29
+        value = value.div(655.29)
       } else if (!['eur', 'usd', 'xaf'].includes(from)) {
         const price = store.getters['coins/coins'].filter(
           (coin: Coin) => coin.symbol === from.toLowerCase()
           // @ts-ignore
         )[0]?.market_data.current_price[to.toLowerCase()]
-        value *= price
+        value = value.mul(price)
       }
-      return formatter.format(value)
+      return formatter.format(value.toNumber())
     }
   )
 }
