@@ -12,7 +12,7 @@ export default {
           text: "Please send the money to the right momo account below.",
           depositAddresses: [
             { text: "Orange", value: "+XXX XXXX XXXXXX" },
-            { text: "MTN", value: "+XXX XXXX XXXXXX" },
+            { text: "MTN", value: "+XXX XXXX XXXXXX" }
           ]
         }
       },
@@ -26,7 +26,24 @@ export default {
 
       submit: "Submit",
       cancel: "Cancel",
-      transactions: "Transactions",
+      transactions: "Transactions"
+    }
+  },
+
+  settings: {
+    currency: "Currency",
+    language: "Language",
+    phone: "Phone:",
+    darkMode: "Dark Mode",
+    signOut: "Sign out"
+  },
+
+
+  components: {
+    wallet: {
+      TransactionList: {
+        NoTransactions: "No transactions yet."
+      }
     }
   }
-}
+};

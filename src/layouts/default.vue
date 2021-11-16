@@ -2,7 +2,8 @@
   <v-app id="crypto-gateway">
     <v-app-bar app fixed>
       <v-app-bar-title class="overflow-visible">
-        {{ route }}
+<!--        {{ route }}-->
+        CamerSwap
       </v-app-bar-title>
       <v-spacer />
       <v-app-bar-nav-icon @click="$router.back()">

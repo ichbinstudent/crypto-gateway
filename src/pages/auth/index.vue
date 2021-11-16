@@ -222,6 +222,7 @@ export default Vue.extend({
           this.$store.commit("settings/setSignupState", { step: 0, phone: credentials.username });
           // TODO: Remove after phone verification works
           this.$store.commit("snackbar/setSnack", { message: "Signup successful. You can log in now!" });
+          this.credentials.phone = this.new_credentials.phone
           this.view = 'signin'
         })
         .catch(() => this.$store.commit("snackbar/setSnack", {

@@ -1,5 +1,5 @@
 <template>
-  <v-list two-line dense class="pa-0">
+  <v-list two-line dense class="pa-0" v-if="items.length > 0">
     <template v-for="item in items">
       <v-subheader
         v-if="item.header"
@@ -48,6 +48,9 @@
       <v-divider />
     </template>
   </v-list>
+  <div v-else class="w-full text-center pt-4">
+    <span>{{ $t('components.wallet.TransactionList.NoTransactions') }}</span>
+  </div>
 </template>
 
 <script lang="ts">
