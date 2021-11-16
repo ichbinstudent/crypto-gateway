@@ -8,7 +8,7 @@ const CoinGeckoClient = new CoinGecko();
 
 export const state = () => ({
   coins: [] as Coin[],
-  availableForTrading: ["eur", "xaf", "cardano", "ripple", "ethereum", "tether", "luna", "bitcoin", "solana"],
+  availableForTrading: ["eur", "xaf", "cardano", "ripple", "ethereum", "tether", "terra-luna", "bitcoin", "solana"],
   networks: ["Binance Smart Chain", "Cardano", "Ethereum", "Ripple", "Luna", "Bitcoin", "MTN", "Orange"]
 });
 
@@ -73,7 +73,7 @@ export const actions: ActionTree<State, State> = {
     context,
     args: { symbol: string; days: number }
   ): Promise<number[][]> {
-    context.commit("addFetching", "fetchCoinPrices")
+    context.commit("addFetching", "fetchCoinPrices", { root: true })
     return new Promise((resolve) => {
       return CoinGeckoClient.coins
         .fetchMarketChart(args.symbol, {

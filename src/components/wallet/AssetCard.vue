@@ -1,5 +1,6 @@
 <template>
   <v-card
+    v-if="item && item.coin"
     :to="localeLocation({
       name: 'wallet' + (item.coin.id ? '-currency' : ''),
       params: { currency: item.coin.id },
@@ -37,6 +38,10 @@
       </div>
     </div>
   </v-card>
+  <v-skeleton-loader
+    v-else
+    type="list-item-avatar"
+  />
 </template>
 
 <script lang="ts">

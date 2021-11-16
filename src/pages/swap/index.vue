@@ -148,6 +148,87 @@
         </v-row>
       </v-card-text>
     </v-card>
+
+    <v-row class="mt-4">
+      <v-col>
+        <v-select :items="coins" v-model="selectedCoin" class="rounded-lg" outlined hide-details dense>
+          <template v-slot:item="{ active, item, attrs, on }">
+            <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-1">
+              <v-list-item-icon class="ml-0 mr-1">
+                <v-img
+                  v-if="item.image.small.includes('coingecko')"
+                  height="24"
+                  width="24"
+                  alt="cryptocurrency icon"
+                  :src="item.image.small"
+                  class="my-auto"
+                />
+                <nuxt-img
+                  provider="cloudinary"
+                  v-else
+                  height="24"
+                  width="24"
+                  alt="cryptocurrency icon"
+                  :src="item.image.large"
+                  class="my-auto"
+                />
+              </v-list-item-icon>
+              <v-list-item-content>
+                {{ item.name }}
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+          <template v-slot:selection="{ active, item, attrs, on }">
+            <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense>
+              <v-list-item-icon>
+                <v-img
+                  v-if="item.image.small.includes('coingecko')"
+                  height="24"
+                  width="24"
+                  alt="cryptocurrency icon"
+                  :src="item.image.small"
+                />
+                <nuxt-img
+                  provider="cloudinary"
+                  v-else
+                  height="24"
+                  width="24"
+                  alt="cryptocurrency icon"
+                  :src="item.image.large"
+                />
+              </v-list-item-icon>
+              <v-list-item-title>
+                {{ item.symbol }}
+              </v-list-item-title>
+            </v-list-item>
+          </template>
+        </v-select>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col>
+        <v-btn
+          class="rounded-lg"
+          block
+          depressed
+          :to="pathToCoin"
+          :disabled="!selectedCoin"
+        >
+          <span class="font-light">{{ $t("wallet._currency.withdraw") }}</span>
+        </v-btn>
+      </v-col>
+      <v-col>
+        <v-btn
+          class="rounded-lg"
+          block
+          depressed
+          :to="pathToCoin"
+          :disabled="!selectedCoin"
+        >
+          <span class="font-light">{{ $t("wallet._currency.deposit") }}</span>
+        </v-btn>
+      </v-col>
+    </v-row>
     <SwapConfirmationDialog v-if="transaction" :show="showConfirmation" :transaction="transaction" />
   </v-container>
 </template>
@@ -159,7 +240,7 @@ import { TransactionTypes } from "~/types/ctypes";
 import { Snack, Swap } from "~/types/interfaces";
 import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.vue";
 import { Decimal } from "decimal.js";
-
+import { Location } from 'vue-router'
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
 
@@ -177,6 +258,9 @@ export default Vue.extend({
     coin2coins(): Coin[] {
       return this.$store.getters["coins/coins"]
         .filter((coin: Coin) => coin.id !== this.pair.coin1.coin?.id);
+    },
+    pathToCoin(): Location | undefined {
+      return this.localeLocation({name: `wallet-currency`, params: {currency: this.selectedCoin?.id ?? 'bitcoin' }})
     }
   },
   data() {
@@ -194,11 +278,13 @@ export default Vue.extend({
       showConfirmation: false,
       transaction: null as Swap | null,
       already_changed: false,
+      selectedCoin: null as Coin | null,
       loading: false
     };
   },
   watch: {
     coins: function(val) {
+      this.selectedCoin = val[0];
       if (!this.pair.coin1.coin)
         this.pair.coin1.coin = val[0];
       if (!this.pair.coin2.coin)
@@ -230,6 +316,7 @@ export default Vue.extend({
     }
   },
   mounted() {
+    this.selectedCoin = this.coins[0];
     if (!this.pair.coin1.coin)
       this.pair.coin1.coin = this.coins[0];
     if (!this.pair.coin2.coin)

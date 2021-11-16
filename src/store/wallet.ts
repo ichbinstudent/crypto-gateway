@@ -67,6 +67,13 @@ export const actions: ActionTree<State, State> = {
           context.commit("setTransactions", transactions);
 
           let wallet = {} as Wallet;
+          context.rootGetters["coins/availableForTrading"].forEach((id:string) => {
+            wallet[id] = {
+              amount: new Decimal(0),
+              coin: context.rootGetters["coins/coins"].find((coin: Coin) => coin.id === id)
+            };
+          })
+
           transactions.filter((transaction: Transaction) => transaction.status == "COMPLETED").forEach((transaction: Transaction) => {
             addIfMissing(wallet,
               transaction,

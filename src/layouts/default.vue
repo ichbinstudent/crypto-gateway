@@ -85,7 +85,7 @@ export default {
       );
     }
   },
-  created() {
+  async created() {
     const t = 1000;
 
     function rejectDelay(reason) {
