@@ -1,13 +1,13 @@
 <template>
   <v-app id="crypto-gateway">
-    <v-app-bar app fixed>
-      <v-app-bar-title class="overflow-visible">
-<!--        {{ route }}-->
+    <v-app-bar app fixed color="primary" dark>
+      <v-app-bar-title>
+        <!-- {{ route }} -->
         CamerSwap
       </v-app-bar-title>
       <v-spacer />
-      <v-app-bar-nav-icon @click="$router.back()">
-        <v-icon>mdi-arrow-left</v-icon>
+      <v-app-bar-nav-icon light @click="$router.back()">
+        <v-icon color="surface">mdi-arrow-left</v-icon>
       </v-app-bar-nav-icon>
     </v-app-bar>
 

@@ -5,12 +5,12 @@
       <v-sheet v-else height="28vh" class="mb-1" color="transparent"></v-sheet>
       <v-row dense class="mt-0 mx-0">
         <v-col>
-          <v-btn class="rounded-lg" block depressed :disabled="!availableForTrading" @click="withdrawDialog = true;">
+          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading" @click="withdrawDialog = true;">
             <span class="font-light">{{ $t("wallet._currency.withdraw") }}</span>
           </v-btn>
         </v-col>
         <v-col>
-          <v-btn class="rounded-lg" block depressed :disabled="!availableForTrading" @click="depositDialog = true;">
+          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading" @click="depositDialog = true;">
             <span class="font-light">{{ $t("wallet._currency.deposit") }}</span>
           </v-btn>
         </v-col>

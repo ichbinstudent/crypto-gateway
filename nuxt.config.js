@@ -108,14 +108,14 @@ export default {
         scheme: "refresh",
         token: {
           property: "access",
-          maxAge: 1800,
+          maxAge: 60 * 60,
           global: true
           // type: 'Bearer'
         },
         refreshToken: {
           property: "refresh",
           data: "refresh",
-          maxAge: 60 * 60 * 24 * 30
+          maxAge: 60 * 60 * 24 * 180
         },
         user: {
           property: ""
@@ -143,7 +143,7 @@ export default {
           background: "#05090c",
           surface: "#111b27",
           primary: "#B5179E",
-          secondary: "#560BAD",
+          secondary: "#7209B7",
           accent: "#4CC9F0",
           error: "#FF5252",
           info: "#2196F3",
@@ -157,7 +157,7 @@ export default {
           background: "#ffffff",
           surface: "#f2f5f8",
           primary: "#B5179E",
-          secondary: "#560BAD",
+          secondary: "#7209B7",
           accent: "#4CC9F0",
           error: "#ef476f",
           info: "#2196F3",

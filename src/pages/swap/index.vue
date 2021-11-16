@@ -141,8 +141,8 @@
         </v-row>
         <v-row dense>
           <v-col>
-            <v-btn class="rounded-lg" color="surface" block depressed large @click="swap" :disabled="loading">
-              <span class="font-light">Swap</span>
+            <v-btn class="rounded-lg" color="primary" block depressed large @click="swap" :disabled="loading">
+              <span class="font-normal">Swap</span>
             </v-btn>
           </v-col>
         </v-row>
@@ -209,6 +209,7 @@
       <v-col>
         <v-btn
           class="rounded-lg"
+          color="primary"
           block
           depressed
           :to="pathToCoin"
@@ -220,6 +221,7 @@
       <v-col>
         <v-btn
           class="rounded-lg"
+          color="primary"
           block
           depressed
           :to="pathToCoin"
