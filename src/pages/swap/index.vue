@@ -240,7 +240,8 @@ import { TransactionTypes } from "~/types/ctypes";
 import { Snack, Swap } from "~/types/interfaces";
 import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.vue";
 import { Decimal } from "decimal.js";
-import { Location } from 'vue-router'
+import { Location } from "vue-router";
+
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
 
@@ -260,7 +261,7 @@ export default Vue.extend({
         .filter((coin: Coin) => coin.id !== this.pair.coin1.coin?.id);
     },
     pathToCoin(): Location | undefined {
-      return this.localeLocation({name: `wallet-currency`, params: {currency: this.selectedCoin?.id ?? 'bitcoin' }})
+      return this.localeLocation({ name: `wallet-currency`, params: { currency: this.selectedCoin?.id ?? "bitcoin" } });
     }
   },
   data() {
@@ -329,7 +330,7 @@ export default Vue.extend({
         resourcetype: "Swap"
       }).then(() => {
         this.$store.dispatch("wallet/updateWallet");
-        this.$router.push(({ name: "wallet" }));
+        this.$router.push(this.localePath({ name: "wallet" }));
       }).catch((e) => {
         this.$store.commit("snackbar/setSnack",
           {

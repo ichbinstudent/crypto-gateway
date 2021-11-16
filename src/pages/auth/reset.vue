@@ -65,7 +65,7 @@ export default Vue.extend({
           this.$store.commit("snackbar/setSnack", {
             message: "E-mail with instructions to reset the password sent."
           });
-          this.$router.push(({ name: "auth-login" }));
+          this.$router.push(this.localePath({ name: "auth-login" }));
         })
         .catch(() =>
           this.$store.commit("snackbar/setSnack", {

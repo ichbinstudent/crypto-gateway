@@ -179,7 +179,7 @@ export default Vue.extend({
         .then(() => {
           window.setTimeout(() => {
             if (this.$auth.loggedIn && this.$route.name === 'auth')
-              this.$router.push('wallet')
+              this.$router.push(this.localePath({name: 'wallet'}))
           }, 1000)
         })
         .catch(() => {
