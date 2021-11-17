@@ -18,11 +18,30 @@ export default (context: Context, inject: any) => {
     if (from === "xaf" && to === "eur") {
       value = value.div(655.29);
     } else if (!["eur", "usd", "xaf"].includes(from)) {
-      const price = context.store.getters["coins/coins"].filter(
-        (coin: Coin) => coin.id === from.toLowerCase()
-        // @ts-ignore
-      )[0]?.market_data.current_price[to.toLowerCase()];
+      let price = 0;
+      if (["eur", "usd", "xaf"].includes(to ?? '')) {
+        price = context.store.getters["coins/coins"].filter(
+          (coin: Coin) => coin.id === from.toLowerCase()
+          // @ts-ignore
+        )[0]?.market_data.current_price[to.toLowerCase()];
+      } else {
+        price = context.store.getters["coins/coins"].filter(
+          (coin: Coin) => coin.id === from.toLowerCase()
+          // @ts-ignore
+        )[0]?.market_data.current_price['usd'];
+        const price2 = context.store.getters["coins/coins"].filter(
+          (coin: Coin) => coin.id === to?.toLowerCase()
+          // @ts-ignore
+        )[0]?.market_data.current_price['usd'];
+        price = price / price2
+      }
       value = value.mul(price);
+    } else {
+      const price = context.store.getters["coins/coins"].filter(
+        (coin: Coin) => coin.id === to?.toLowerCase()
+        // @ts-ignore
+      )[0]?.market_data.current_price[from.toLowerCase()];
+      value = value.div(price);
     }
     return value
   };

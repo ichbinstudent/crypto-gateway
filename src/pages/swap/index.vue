@@ -343,33 +343,16 @@ export default Vue.extend({
     });
   },
   methods: {
-    // TODO: Fix fiat - crypto exchange rates
     async coin1Changed() {
       try {
-        const price = await CoinGeckoClient.simple.price({
-          ids: [this.pair.coin1.coin?.id, this.pair.coin2.coin?.id],
-          vs_currencies: ["usd"]
-        });
-        this.pair.coin2.amount =
-          new Decimal(this.pair.coin1.amount)
-            .mul(price.data[this.pair.coin1.coin?.id ?? ""]["usd"])
-            .div(price.data[this.pair.coin2.coin?.id ?? ""]["usd"])
-            .toPrecision(20);
+        this.pair.coin2.amount = this.$util.ConvertCurrency(this.pair.coin1.amount, this.pair.coin1.coin?.id ?? 'eur', this.pair.coin2.coin?.id).toString()
+        return
       } catch {
       }
     },
-    // TODO: Fix fiat - crypto exchange rates
     async coin2Changed() {
       try {
-        const price = await CoinGeckoClient.simple.price({
-          ids: [this.pair.coin1.coin?.id, this.pair.coin2.coin?.id],
-          vs_currencies: ["usd"]
-        });
-        this.pair.coin1.amount =
-          new Decimal(this.pair.coin2.amount)
-            .mul(price.data[this.pair.coin2.coin?.id ?? ""]["usd"])
-            .div(price.data[this.pair.coin1.coin?.id ?? ""]["usd"])
-            .toPrecision(20);
+        this.pair.coin1.amount = this.$util.ConvertCurrency(this.pair.coin2.amount, this.pair.coin2.coin?.id ?? 'eur', this.pair.coin1.coin?.id).toString()
       } catch {
       }
     },

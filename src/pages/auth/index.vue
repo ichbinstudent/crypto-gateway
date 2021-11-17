@@ -196,7 +196,7 @@ export default Vue.extend({
       this.$auth.loginWith("custom", { data: credentials })
         .then(() => {
           this.$store.dispatch("wallet/updateWallet");
-          window.setTimeout(() => {
+          setTimeout(() => {
             if (this.$auth.loggedIn && this.$route.name === "auth") {
               this.$router.push(this.localePath({ name: "wallet" }));
             }
