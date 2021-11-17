@@ -38,6 +38,32 @@ export default {
     signOut: "Sign out"
   },
 
+  auth: {
+    termsAndPrivacySignIn: 'By signing in, you agree to the <a\n' +
+      'class="font-semibold"\n' +
+      'href="https://www.iubenda.com/privacy-policy/72352797"\n' +
+      'target="_blank" rel="noopener noreferrer">Privacy Policy</a> and the\n' +
+      '<a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797"\n' +
+      'target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.',
+    termsAndPrivacySignUp: 'I have read and I agree to the <a\n' +
+      'class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797"\n' +
+      'target="_blank" rel="noopener noreferrer"\n' +
+      '>Privacy Policy</a> and the\n' +
+      '<a class="font-semibold"\n' +
+      'href="https://www.iubenda.com/terms-and-conditions/72352797"\n' +
+      'target="_blank" rel="noopener noreferrer"\n' +
+      '>Terms and Conditions</a>.',
+    forgotPassword: 'Forgot your password?',
+
+    firstName: 'First name',
+    lastName: 'Last name',
+    phone: 'Phone number',
+    password: 'Password',
+    repeatPassword: 'Repeat the password',
+    signInBtn: 'Sign in',
+    signUpBtn: 'Sign up',
+
+  },
 
   components: {
     wallet: {

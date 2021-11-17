@@ -178,7 +178,14 @@ export default {
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
+    meta: {
+      theme_color: '#B5179E'
+    },
     manifest: {
+      name: 'CamerSwap',
+      short_name: 'CamerSwap',
+      background_color: '#ffffff',
+      start_url: '/wallet?standalone=true',
       lang: "en"
     }
   },

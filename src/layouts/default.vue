@@ -55,6 +55,7 @@
         color="primary"
         id="floating-center-button"
         fab
+        x-large
         fixed
         :ripple="false"
         class="bottom-1"
@@ -102,7 +103,10 @@ export default {
       p = p
         .catch(() => {
           this.$store.dispatch("coins/fetchCoins")
-            .then(() => this.$store.dispatch("wallet/updateWallet"));
+            .then(() => {
+              if (this.$auth.loggedIn)
+                this.$store.dispatch("wallet/updateWallet");
+            });
         })
         .catch(rejectDelay);
     }

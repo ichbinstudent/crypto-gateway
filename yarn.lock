@@ -2507,6 +2507,11 @@ autoprefixer@^9.6.1:
     postcss "^7.0.32"
     postcss-value-parser "^4.1.0"
 
+awesome-phonenumber@^2.15.0:
+  version "2.64.0"
+  resolved "https://registry.yarnpkg.com/awesome-phonenumber/-/awesome-phonenumber-2.64.0.tgz#e56a5aaa09cbd5381568a581b7a22734812685d5"
+  integrity sha512-mwnZcIv8b/Iy1yn7NrmA1s3C0OBZ4EEgZjCBExS6Vo9rfRLLQoq0leozHqzrnWzDYiFW22X4gxH3rSbMmu9vrA==
+
 axios-retry@^3.1.9:
   version "3.2.4"
   resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-3.2.4.tgz#f447a53c3456f5bfeca18f20c3a3272207d082ae"
@@ -9523,6 +9528,15 @@ vue-style-loader@^4.1.0, vue-style-loader@^4.1.3:
     hash-sum "^1.0.2"
     loader-utils "^1.0.2"
 
+vue-tel-input-vuetify@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/vue-tel-input-vuetify/-/vue-tel-input-vuetify-1.4.1.tgz#9ca62c9c9feb5d96adce59467885e79c285a4a39"
+  integrity sha512-oOswIiWhnkiVoNC4eCJJef4GG0mVkFsiVXTSquTio+oPn4GfMwm5f2OUv9qvuBE5IxdvW2X5WQZOF8IKhN7kHA==
+  dependencies:
+    awesome-phonenumber "^2.15.0"
+    vuetify "^2.2.11"
+    whatwg-fetch "^3.2.0"
+
 vue-template-compiler@^2.6.12, vue-template-compiler@^2.6.14:
   version "2.6.14"
   resolved "https://registry.yarnpkg.com/vue-template-compiler/-/vue-template-compiler-2.6.14.tgz#a2f0e7d985670d42c9c9ee0d044fed7690f4f763"
@@ -9549,6 +9563,11 @@ vuetify-loader@^1.7.2:
     decache "^4.6.0"
     file-loader "^6.2.0"
     loader-utils "^2.0.0"
+
+vuetify@^2.2.11:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.6.0.tgz#7fcb8ec7b122760750b5c028a15188e3ab45158c"
+  integrity sha512-a3gClGGY8FYIHvHtqDDmVnmTg8D5pPPcs3HYqdrmJ7b3RrF+bWlpqpAhUPVvD9ByYYWVKba4viAlhOc74meGsg==
 
 vuetify@^2.5.3:
   version "2.5.10"
@@ -9680,6 +9699,11 @@ webpackbar@^4.0.0:
     std-env "^2.2.1"
     text-table "^0.2.0"
     wrap-ansi "^6.0.0"
+
+whatwg-fetch@^3.2.0:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
+  integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
 
 whatwg-url@^5.0.0:
   version "5.0.0"

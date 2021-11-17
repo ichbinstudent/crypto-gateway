@@ -1,37 +1,46 @@
 <template>
-  <v-container class="py-4">
-    <v-card class="pa-2 mx-auto rounded-lg" flat max-width="600">
-      <v-card-title>
-        <v-btn-toggle class="mx-auto" v-model="view" mandatory denseq rounded>
+  <div class="py-4 px-0">
+    <v-card class="px-0 sm:px-2 py-2 mx-auto rounded-lg" flat max-width="600">
+      <v-card-title class="mb-4">
+        <v-btn-toggle color="primary" class="mx-auto" v-model="view" mandatory denseq rounded>
           <v-btn value="signin">Sign In</v-btn>
           <v-btn value="signup">Sign Up</v-btn>
         </v-btn-toggle>
       </v-card-title>
       <v-card-text v-if="view === 'signin'">
         <v-form @submit.prevent="signIn" v-model="signin_valid">
-          <v-text-field
-            type="phone"
-            v-model="credentials.phone"
-            label="Phone"
+          <VueTelInputVuetify
             outlined
-            class="rounded-lg"
-            :rules="[rules.required, rules.phoneMatch]"
+            :label="$t('auth.phone')"
+            :rules="[rules.required]"
+            v-model="credentials.phone"
+            text-field-classes="rounded-lg"
+            select-classes="rounded-lg mr-1"
+            :preferred-countries="['cm', 'de', 'fr']"
+            :valid-characters-only="true"
+            @input="onNumberSignInInput"
           />
           <v-text-field
             v-model="credentials.password"
-            label="Password"
+            :label="$t('auth.password')"
             type="password"
             outlined
             class="rounded-lg"
             :rules="[rules.required]"
           />
 
-          <v-btn block class="primary" large type="submit" :disabled="!signin_valid" :loading="loading">Sign In</v-btn>
+          <v-btn block
+                 color="primary"
+                 large
+                 type="submit"
+                 :disabled="!signin_valid"
+                 :loading="loading"
+                 v-text="$t('auth.signInBtn')"
+          />
 
           <div class="text-overline text-uppercase mt-3 text-center">
             <v-responsive max-width="280" class="mx-auto">
-              By signing in, you agree to the
-              <a href="#">Terms of Service</a> & <a href="#">Privacy Policy</a>
+              <span v-html="$t('auth.termsAndPrivacySignIn')" />
             </v-responsive>
           </div>
         </v-form>
@@ -43,10 +52,10 @@
             type="text"
             v-model="new_credentials.first_name"
             :rules="[rules.required]"
-            aria-label="First Name"
             outlined
             class="rounded-lg"
-            label="First name"
+            :label="$t('auth.firstName')"
+            :aria-label="$t('auth.firstName')"
           />
           <v-text-field
             type="text"
@@ -55,19 +64,25 @@
             aria-label="Last Name"
             outlined
             class="rounded-lg"
-            label="Last name"
+            :label="$t('auth.lastName')"
+            :aria-label="$t('auth.lastName')"
           />
-          <v-text-field
-            type="phone"
-            v-model="new_credentials.phone"
-            label="Phone"
+          <VueTelInputVuetify
             outlined
-            class="rounded-lg"
-            :rules="[rules.required, rules.phoneMatch]"
+            :rules="[rules.required]"
+            :label="$t('auth.phone')"
+            :aria-label="$t('auth.phone')"
+            v-model="new_credentials.phone"
+            select-classes="rounded-lg mr-1"
+            text-field-classes="rounded-lg"
+            :preferred-countries="['cm', 'de', 'fr']"
+            :valid-characters-only="true"
+            @input="onNumberSignUpInput"
           />
           <v-text-field
             v-model="new_credentials.password"
-            label="Password"
+            :label="$t('auth.password')"
+            :aria-label="$t('auth.password')"
             type="password"
             outlined
             class="rounded-lg"
@@ -75,7 +90,8 @@
           />
           <v-text-field
             v-model="new_credentials.password2"
-            label="Password again"
+            :label="$t('auth.repeatPassword')"
+            :aria-label="$t('auth.repeatPassword')"
             type="password"
             outlined
             class="rounded-lg"
@@ -83,25 +99,10 @@
           />
           <v-checkbox v-model="new_credentials.terms_and_privacy" dense aria-required="true">
             <template #label>
-              <div>
-                I have read and I agree to the <a
-                class="font-semibold"
-                href="https://www.iubenda.com/privacy-policy/72352797"
-                target="_blank"
-                rel="noopener noreferrer"
-                @click.stop
-              >Privacy Policy</a> and the
-                <a
-                  class="font-semibold"
-                  href="https://www.iubenda.com/terms-and-conditions/72352797"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  @click.stop
-                >Terms and Conditions</a>.
-              </div>
+              <div v-html="$t('auth.termsAndPrivacySignUp')" />
             </template>
           </v-checkbox>
-          <v-btn block class="primary" large type="submit" :disabled="!signup_valid">Sign Up</v-btn>
+          <v-btn block class="primary" large type="submit" :disabled="!signup_valid" v-text="$t('auth.signUpBtn')" />
         </v-form>
         <v-form @submit.prevent="smsVerification" v-model="signup2_valid" v-else-if="signupStep === 1">
           <v-text-field
@@ -111,7 +112,8 @@
             class="rounded-lg"
             :rules="[rules.required]"
           />
-          <v-btn block class="primary mb-2" large type="submit" :disabled="!signup2_valid" :loading="loading">Verify
+          <v-btn block color="primary" class="mb-2" large type="submit" :disabled="!signup2_valid" :loading="loading">
+            Verify
           </v-btn>
           <v-btn block text color="error" @click="cancelVerification">Cancel</v-btn>
         </v-form>
@@ -119,12 +121,12 @@
 
       <div class="text-center mt-2 text-body-2">
         <nuxt-link :to="localeLocation({name: 'auth-reset'})">
-          Forgot your password?
+          {{ $t('auth.forgotPassword') }}
         </nuxt-link>
       </div>
 
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
@@ -132,9 +134,17 @@ import Vue from "vue";
 import { Snack } from "~/types/interfaces";
 import rules from "./rules";
 import { mapGetters } from "vuex";
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
 
+
+interface Phone {
+  number: any
+  valid: boolean
+  country: any
+}
 
 export default Vue.extend({
+  components: { VueTelInputVuetify },
   auth: "guest",
   data() {
     return {
@@ -151,11 +161,13 @@ export default Vue.extend({
         phone: "",
         password: "",
         password2: "",
-        terms_and_privacy: false
+        terms_and_privacy: false,
+        phone_valid: false,
       },
       credentials: {
         phone: "",
-        password: ""
+        password: "",
+        phone_valid: false
       }
     };
   },
@@ -166,6 +178,12 @@ export default Vue.extend({
     })
   },
   methods: {
+    onNumberSignInInput (_: string, { number }: Phone) {
+      this.credentials.phone = number.international
+    },
+    onNumberSignUpInput (_: string, { number }: Phone) {
+      this.new_credentials.phone = number.international
+    },
     same_password_rule(v: String): string | boolean {
       return v === this.new_credentials.password ?? "Passwords have to match";
     },
@@ -177,10 +195,12 @@ export default Vue.extend({
       this.loading = true;
       this.$auth.loginWith("custom", { data: credentials })
         .then(() => {
+          this.$store.dispatch("wallet/updateWallet");
           window.setTimeout(() => {
-            if (this.$auth.loggedIn && this.$route.name === 'auth')
-              this.$router.push(this.localePath({name: 'wallet'}))
-          }, 1000)
+            if (this.$auth.loggedIn && this.$route.name === "auth") {
+              this.$router.push(this.localePath({ name: "wallet" }));
+            }
+          }, 1000);
         })
         .catch(() => {
           this.$store.commit("snackbar/setSnack", { message: "Invalid credentials", color: "error", icon: "error" });
@@ -216,14 +236,14 @@ export default Vue.extend({
       };
       this.loading = true;
       this.$axios.post("/auth/user/", credentials)
-        .then(response => {
+        .then(() => {
           this.$store.commit("snackbar/setSnack", { message: "A verification code was sent to your phone." });
           // TODO: Fix if phone verification works (change step: 0 to step: 1
           this.$store.commit("settings/setSignupState", { step: 0, phone: credentials.username });
           // TODO: Remove after phone verification works
           this.$store.commit("snackbar/setSnack", { message: "Signup successful. You can log in now!" });
-          this.credentials.phone = this.new_credentials.phone
-          this.view = 'signin'
+          this.credentials.phone = this.new_credentials.phone;
+          this.view = "signin";
         })
         .catch(() => this.$store.commit("snackbar/setSnack", {
           message: "Something went wrong",
