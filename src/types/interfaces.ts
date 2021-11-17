@@ -45,9 +45,9 @@ export interface Wallet {
 }
 
 export interface Snack {
-  show: boolean,
-  top: boolean,
+  show?: boolean,
+  top?: boolean,
   message: string,
-  color: string,
-  timeout: number
+  color?: string,
+  timeout?: number
 }

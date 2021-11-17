@@ -1,3 +1,9 @@
+process.env.NUXT_ENV_COMMIT_HASH = require('child_process')
+  .execSync('git rev-parse --short HEAD')
+  .toString()
+  .trim()
+process.env.NUXT_ENV_VERSION = require('./package.json').version
+
 export default {
   srcDir: "./src",
   target: "static",

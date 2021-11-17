@@ -26,7 +26,7 @@
     </v-row>
     <v-row>
       <v-col>
-        <span>{{ $t('settings.phone') }} {{ phone }}</span>
+        <span>{{ $t("settings.phone") }} {{ phone }}</span>
       </v-col>
     </v-row>
     <v-row dense>
@@ -36,15 +36,20 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-btn plain text block color="error" class="text-center" @click="$auth.logout()">{{ $t('settings.signOut') }}</v-btn>
+        <v-btn plain text block color="error" class="text-center" @click="$auth.logout()"
+               v-text="$t('settings.signOut')" />
       </v-col>
     </v-row>
+    <v-spacer />
+    <div class="text-center absolute bottom-4 text-xs w-full left-0">
+      {{ version }}
+    </div>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import { Locale, LocaleObject } from "@nuxtjs/i18n";
+import { LocaleObject } from "@nuxtjs/i18n";
 
 export default Vue.extend({
   data() {
@@ -76,11 +81,14 @@ export default Vue.extend({
   },
 
   computed: {
-    phone() {
+    phone(): string {
       return this.$auth.user?.username;
     },
-    availableLocales (): string[] {
-      return this.$i18n.locales.map((i: LocaleObject) => i.code)
+    availableLocales(): string[] {
+      return this.$i18n.locales.map((i: LocaleObject) => i.code);
+    },
+    version(): string {
+      return `${process.env.NUXT_ENV_VERSION} ${process.env.NUXT_ENV_COMMIT_HASH}`;
     }
   }
 });

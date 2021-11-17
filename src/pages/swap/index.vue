@@ -241,7 +241,6 @@ import Vue from "vue";
 import { TransactionTypes } from "~/types/ctypes";
 import { Snack, Swap } from "~/types/interfaces";
 import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.vue";
-import { Decimal } from "decimal.js";
 import { Location } from "vue-router";
 
 const CoinGecko = require("coingecko-api");
@@ -250,6 +249,9 @@ const CoinGeckoClient = new CoinGecko();
 
 export default Vue.extend({
   components: { SwapConfirmationDialog },
+  head: {
+    title: "Swap"
+  },
   computed: {
     coins(): Coin[] {
       return this.$store.getters["coins/coins"];
@@ -345,14 +347,14 @@ export default Vue.extend({
   methods: {
     async coin1Changed() {
       try {
-        this.pair.coin2.amount = this.$util.ConvertCurrency(this.pair.coin1.amount, this.pair.coin1.coin?.id ?? 'eur', this.pair.coin2.coin?.id).toString()
-        return
+        this.pair.coin2.amount = this.$util.ConvertCurrency(this.pair.coin1.amount, this.pair.coin1.coin?.id ?? "eur", this.pair.coin2.coin?.id).toString();
+        return;
       } catch {
       }
     },
     async coin2Changed() {
       try {
-        this.pair.coin1.amount = this.$util.ConvertCurrency(this.pair.coin2.amount, this.pair.coin2.coin?.id ?? 'eur', this.pair.coin1.coin?.id).toString()
+        this.pair.coin1.amount = this.$util.ConvertCurrency(this.pair.coin2.amount, this.pair.coin2.coin?.id ?? "eur", this.pair.coin1.coin?.id).toString();
       } catch {
       }
     },
