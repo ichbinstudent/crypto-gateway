@@ -67,8 +67,10 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
   data() {
     return {
       drawer: false,
@@ -112,12 +114,12 @@ export default {
     }
     // p = p.then(processResult).catch(errorHandler)
 
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0]
+    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any;
     if (element) {
       element.style.display = "none";
     }
   }
-};
+});
 </script>
 
 <style lang="scss">

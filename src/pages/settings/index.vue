@@ -92,13 +92,13 @@ export default Vue.extend({
     }
   },
   mounted() {
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0]
+    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any
     if (element) {
       element.style.display = "inherit";
     }
   },
   beforeRouteLeave(_1, _2, next) {
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0]
+    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any
     if (element) {
       element.style.display = "none";
     }
