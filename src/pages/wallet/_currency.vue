@@ -4,8 +4,12 @@
       <div class="px-2">
         <div v-if="walletEntry && walletEntry.coin.market_data" class="flex flex-row">
           <div class="flex flex-col">
-            <span class="text-6xl font-semibold">{{ walletEntry.amount | convertCurrency(walletEntry.coin.symbol) }}</span>
-            <span class="text-2xl">{{ walletEntry.amount | formatCurrency(walletEntry.coin.symbol) }}</span>
+            <span :class="'font-semibold ' + (currency==='xaf'?'text-xl':'text-4xl')">
+              {{ walletEntry.amount | convertCurrency(walletEntry.coin.symbol) }}
+            </span>
+            <span :class="' ' + (currency==='xaf'?'text-lg':'text-2xl')">
+              {{ walletEntry.amount | formatCurrency(walletEntry.coin.symbol) }}
+            </span>
           </div>
           <v-spacer />
           <div>
@@ -17,6 +21,7 @@
           </div>
         </div>
         <v-skeleton-loader v-else-if="!walletEntry" type="text" />
+        <div v-else class="h-16" />
       </div>
       <CryptoChart v-if="!fiat" :symbol="coin.id" v-model="daysSelected"></CryptoChart>
       <v-sheet v-else height="28vh" class="mb-1" color="transparent"></v-sheet>
@@ -211,6 +216,7 @@ import { Deposit, Snack, Transaction, WalletEntry, Withdrawal } from "~/types/in
 import rules from "~/pages/auth/rules";
 import { TransactionTypes } from "~/types/ctypes";
 import { Decimal } from "decimal.js";
+
 const PullToRefresh = require("pulltorefreshjs");
 
 
@@ -261,6 +267,10 @@ export default Vue.extend({
     },
     fiat(): boolean {
       return ["eur", "xaf"].includes(this.$route.params.currency);
+    },
+    currency(): string {
+      console.log(this.$store.getters["settings/currency"])
+      return this.$store.getters["settings/currency"];
     },
     availableForTrading(): boolean {
       return this.$store.getters["coins/availableForTrading"]
@@ -339,7 +349,7 @@ export default Vue.extend({
       onRefresh: async () => {
         await this.$store.dispatch("coins/fetchCoins");
         await this.$store.dispatch("wallet/updateWallet");
-      },
+      }
     });
   },
   beforeRouteLeave(_1, _2, next) {
@@ -362,6 +372,6 @@ export default Vue.extend({
 }
 
 #floating-card {
-  margin-top: calc(5.75rem + 25vh + 2 * 36px + 28px);
+  margin-top: calc(4rem + 25vh + 2 * 36px + 28px);
 }
 </style>
