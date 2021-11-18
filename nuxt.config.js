@@ -26,20 +26,20 @@ export default {
         href: "//fonts.googleapis.com/css?family=Maven+Pro"
       }
     ],
-    script: [
-      {
-        src: "//cdn.plutio.com/messenger/main.js",
-        async: true,
-        defer: true,
-        callback: () => {
-          window['$plutio_msg'] = function () {
-            (window['$plutio_msg'].q = window['$plutio_msg'].q || []).push(arguments);
-          };
-          window.$plutio_msg('WkJJSuArLLBAchu6Z', { });
-
-        }
-      }
-    ]
+    // script: [
+    //   {
+    //     src: "//cdn.plutio.com/messenger/main.js",
+    //     async: true,
+    //     defer: true,
+    //     callback: () => {
+    //       window['$plutio_msg'] = function () {
+    //         (window['$plutio_msg'].q = window['$plutio_msg'].q || []).push(arguments);
+    //       };
+    //       window.$plutio_msg('WkJJSuArLLBAchu6Z', { });
+    //
+    //     }
+    //   }
+    // ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -59,7 +59,8 @@ export default {
     { src: "~/filters/markdown.ts" },
     { src: "~/filters/date.ts" },
     // plugins
-    { src: "~/plugins/convertCurrency.ts" }
+    { src: "~/plugins/convertCurrency.ts" },
+    { src: "~/plugins/plutio.js" }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

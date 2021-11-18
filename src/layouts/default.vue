@@ -111,6 +111,11 @@ export default {
         .catch(rejectDelay);
     }
     // p = p.then(processResult).catch(errorHandler)
+
+    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0]
+    if (element) {
+      element.style.display = "none";
+    }
   }
 };
 </script>
