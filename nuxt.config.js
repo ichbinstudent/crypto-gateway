@@ -1,8 +1,8 @@
-process.env.NUXT_ENV_COMMIT_HASH = require('child_process')
-  .execSync('git rev-parse --short HEAD')
+process.env.NUXT_ENV_COMMIT_HASH = require("child_process")
+  .execSync("git rev-parse --short HEAD")
   .toString()
-  .trim()
-process.env.NUXT_ENV_VERSION = require('./package.json').version
+  .trim();
+process.env.NUXT_ENV_VERSION = require("./package.json").version;
 
 export default {
   srcDir: "./src",
@@ -24,6 +24,20 @@ export default {
         rel: "stylesheet",
         type: "text/css",
         href: "//fonts.googleapis.com/css?family=Maven+Pro"
+      }
+    ],
+    script: [
+      {
+        src: "//cdn.plutio.com/messenger/main.js",
+        async: true,
+        defer: true,
+        callback: () => {
+          window['$plutio_msg'] = function () {
+            (window['$plutio_msg'].q = window['$plutio_msg'].q || []).push(arguments);
+          };
+          window.$plutio_msg('WkJJSuArLLBAchu6Z', { });
+
+        }
       }
     ]
   },
@@ -185,13 +199,13 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      theme_color: '#B5179E'
+      theme_color: "#B5179E"
     },
     manifest: {
-      name: 'CamerSwap',
-      short_name: 'CamerSwap',
-      background_color: '#ffffff',
-      start_url: '/wallet?standalone=true',
+      name: "CamerSwap",
+      short_name: "CamerSwap",
+      background_color: "#ffffff",
+      start_url: "/wallet?standalone=true",
       lang: "en"
     }
   },
