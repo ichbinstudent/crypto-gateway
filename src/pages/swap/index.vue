@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container id="main-container">
     <v-card class="rounded-lg" id="swap-card">
       <v-card-text>
         <v-row dense>
@@ -243,6 +243,7 @@ import { Snack, Swap } from "~/types/interfaces";
 import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.vue";
 import { Location } from "vue-router";
 
+const PullToRefresh = require("pulltorefreshjs");
 const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
 
@@ -343,6 +344,17 @@ export default Vue.extend({
           } as Snack);
       });
     });
+    PullToRefresh.init({
+      mainElement: "#main-container",
+      onRefresh: async () => {
+        await this.$store.dispatch("coins/fetchCoins");
+        await this.$store.dispatch("wallet/updateWallet");
+      }
+    });
+  },
+  beforeRouteLeave(_1, _2, next) {
+    PullToRefresh.destroyAll();
+    next();
   },
   methods: {
     async coin1Changed() {

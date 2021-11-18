@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container id="main-container">
     <h2 class="text-2xl mb-2">Fiat</h2>
     <template v-if="fiat.length > 0">
       <AssetCard
@@ -41,10 +41,16 @@
 import Vue from "vue";
 import AssetCard from "~/components/wallet/AssetCard.vue";
 import { Wallet, WalletEntry } from "~/types/interfaces";
+const PullToRefresh = require('pulltorefreshjs');
 
 
 export default Vue.extend({
   components: { AssetCard },
+  data() {
+    return {
+      iconName: ""
+    };
+  },
   head() {
     return {
       title: "Wallet"
@@ -64,6 +70,19 @@ export default Vue.extend({
         .map((key: string) => this.$store.getters["wallet/wallet"][key])
         .sort((a: WalletEntry, b: WalletEntry) => b.amount.sub(a.amount).toNumber());
     }
+  },
+  mounted() {
+    PullToRefresh.init({
+      mainElement: "#main-container",
+      onRefresh: async () => {
+        await this.$store.dispatch("coins/fetchCoins");
+        await this.$store.dispatch("wallet/updateWallet");
+      }
+    });
+  },
+  beforeRouteLeave(_1, _2, next) {
+    PullToRefresh.destroyAll();
+    next();
   }
 });
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <div class="absolute top-0 right-1">
       <v-btn-toggle
         background-color="transparent"
@@ -44,7 +44,7 @@ export default Vue.extend({
     return {
       coinPrices: [] as number[][],
       loading: false,
-      selectedDays: this.days,
+      selectedDays: this.value,
     }
   },
   created() {
@@ -62,7 +62,7 @@ export default Vue.extend({
       required: true,
       type: String,
     },
-    days: {
+    value: {
       required: false,
       type: Number,
       default: 1,
@@ -95,6 +95,8 @@ export default Vue.extend({
   },
   watch: {
     selectedDays: function (val) {
+      this.$emit('input', val)
+
       this.loading = true
       this.$store
         .dispatch('coins/fetchCoinPrices', {

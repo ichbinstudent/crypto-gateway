@@ -1,21 +1,41 @@
 <template>
-  <div>
+  <div id="main-container">
     <div class="w-full fixed top-16" id="fixed-bg-item">
-      <CryptoChart v-if="!fiat" :symbol="coin.id" :days="1"></CryptoChart>
+      <div class="px-2">
+        <div v-if="walletEntry && walletEntry.coin.market_data" class="flex flex-row">
+          <div class="flex flex-col">
+            <span class="text-6xl font-semibold">{{ walletEntry.amount | convertCurrency(walletEntry.coin.symbol) }}</span>
+            <span class="text-2xl">{{ walletEntry.amount | formatCurrency(walletEntry.coin.symbol) }}</span>
+          </div>
+          <v-spacer />
+          <div>
+            <span
+              :class="'text-2xl ' + (priceChange <= 0 ? 'text-red-500' : 'text-green-500')"
+            >
+              {{ priceChange.toFixed(2) }}%
+            </span>
+          </div>
+        </div>
+        <v-skeleton-loader v-else-if="!walletEntry" type="text" />
+      </div>
+      <CryptoChart v-if="!fiat" :symbol="coin.id" v-model="daysSelected"></CryptoChart>
       <v-sheet v-else height="28vh" class="mb-1" color="transparent"></v-sheet>
       <v-row dense class="mt-0 mx-0">
         <v-col>
-          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading" @click="withdrawDialog = true;">
+          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading"
+                 @click="withdrawDialog = true;">
             <span class="font-light">{{ $t("wallet._currency.withdraw") }}</span>
           </v-btn>
         </v-col>
         <v-col>
-          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading" @click="depositDialog = true;">
+          <v-btn class="rounded-lg" color="primary" block depressed :disabled="!availableForTrading"
+                 @click="depositDialog = true;">
             <span class="font-light">{{ $t("wallet._currency.deposit") }}</span>
           </v-btn>
         </v-col>
       </v-row>
     </div>
+
     <v-card
       class="mx-0 mb-0 pb-0 rounded-t-xl h-screen relative"
       id="floating-card"
@@ -89,7 +109,8 @@
             </v-row>
             <v-row dense>
               <v-col>
-                <v-btn color="primary" block large class="font-light" :disabled="!depositFormValid || loading" type="submit">
+                <v-btn color="primary" block large class="font-light" :disabled="!depositFormValid || loading"
+                       type="submit">
                   <span class="font-light">{{ $t("wallet._currency.submit") }}</span>
                 </v-btn>
               </v-col>
@@ -164,7 +185,8 @@
               </v-row>
               <v-row dense>
                 <v-col>
-                  <v-btn color="primary" block large class="font-light" :disabled="!withdrawFormValid || loading" type="submit">
+                  <v-btn color="primary" block large class="font-light" :disabled="!withdrawFormValid || loading"
+                         type="submit">
                     <span class="font-light">{{ $t("wallet._currency.submit") }}</span>
                   </v-btn>
                 </v-col>
@@ -185,10 +207,11 @@ import Vue from "vue";
 import CryptoChart from "~/components/wallet/CryptoChart.vue";
 import TransactionList from "~/components/wallet/TransactionList.vue";
 import { Coin } from "~/types/coingecko";
-import { Deposit, Snack, Transaction, Withdrawal } from "~/types/interfaces";
+import { Deposit, Snack, Transaction, WalletEntry, Withdrawal } from "~/types/interfaces";
 import rules from "~/pages/auth/rules";
 import { TransactionTypes } from "~/types/ctypes";
 import { Decimal } from "decimal.js";
+const PullToRefresh = require("pulltorefreshjs");
 
 
 export default Vue.extend({
@@ -223,21 +246,39 @@ export default Vue.extend({
         address: "",
         network: ""
       },
-      loading: false
+      loading: false,
+      daysSelected: 1
     };
   },
   head() {
     return {
-      title: `Wallet > ${(this as any).coin.name}`
+      title: `Wallet - ${(this as any).coin.name}`
     };
   },
   computed: {
+    walletEntry(): WalletEntry {
+      return this.$store.getters["wallet/wallet"][this.coin.id];
+    },
     fiat(): boolean {
       return ["eur", "xaf"].includes(this.$route.params.currency);
     },
     availableForTrading(): boolean {
       return this.$store.getters["coins/availableForTrading"]
         .includes(this.coin.id);
+    },
+    priceChange(): number {
+      switch (this.daysSelected) {
+        case 1:
+          return this.walletEntry.coin.market_data.price_change_24h;
+        case 7:
+          return this.walletEntry.coin.market_data.price_change_percentage_7d;
+        case 30:
+          return this.walletEntry.coin.market_data.price_change_percentage_30d;
+        case 365:
+          return this.walletEntry.coin.market_data.price_change_percentage_1y;
+        default:
+          return 0;
+      }
     }
   },
   methods: {
@@ -285,12 +326,25 @@ export default Vue.extend({
           message: "Something went wrong. Please try again later."
         } as Snack)
       ).finally(() => {
-        this.$store.dispatch("wallet/updateWallet")
+        this.$store.dispatch("wallet/updateWallet");
         this.depositDialog = false;
         this.withdrawDialog = false;
         this.loading = false;
       });
     }
+  },
+  mounted() {
+    PullToRefresh.init({
+      mainElement: "#main-container",
+      onRefresh: async () => {
+        await this.$store.dispatch("coins/fetchCoins");
+        await this.$store.dispatch("wallet/updateWallet");
+      },
+    });
+  },
+  beforeRouteLeave(_1, _2, next) {
+    PullToRefresh.destroyAll();
+    next();
   }
 });
 </script>
@@ -308,6 +362,6 @@ export default Vue.extend({
 }
 
 #floating-card {
-  margin-top: calc(25vh + 2 * 36px + 28px);
+  margin-top: calc(5.75rem + 25vh + 2 * 36px + 28px);
 }
 </style>

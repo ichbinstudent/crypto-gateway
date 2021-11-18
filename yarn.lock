@@ -1847,6 +1847,11 @@
   resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.4.tgz#8772fcd0418e3cd2cc171555d73007415051f4b2"
   integrity sha1-h3L80EGOPNLMFxVV1zAHQVBR9LI=
 
+"@types/pulltorefreshjs@^0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@types/pulltorefreshjs/-/pulltorefreshjs-0.1.5.tgz#f15c9dbc91b8fdd8135093d81ece9e9d4d2324d7"
+  integrity sha512-/VRTgBettvBg1KI8mGnA9oeWs359tTXQ7qsxLuXnksL88jvK6ZNMStG5T9x9vUO9O7jLsgREB0cElz/BWFfdew==
+
 "@types/q@^1.5.1":
   version "1.5.5"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
@@ -7854,6 +7859,11 @@ public-encrypt@^4.0.0:
     randombytes "^2.0.1"
     safe-buffer "^5.1.2"
 
+pulltorefreshjs@^0.1.22:
+  version "0.1.22"
+  resolved "https://registry.yarnpkg.com/pulltorefreshjs/-/pulltorefreshjs-0.1.22.tgz#ddb5e3feee0b2a49fd46e1b18e84fffef2c47ac0"
+  integrity sha512-haxNVEHnS4NCQA7NeG7TSV69z4uqy/N7nfPRuc4dPWe8H6ygUrMjdNeohE+6v0lVVX/ukSjbLYwPUGUYtFKfvQ==
+
 pump@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pump/-/pump-2.0.1.tgz#12399add6e4cf7526d973cbc8b5ce2e2908b3909"
@@ -9500,6 +9510,11 @@ vue-no-ssr@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vue-no-ssr/-/vue-no-ssr-1.1.1.tgz#875f3be6fb0ae41568a837f3ac1a80eaa137b998"
   integrity sha512-ZMjqRpWabMPqPc7gIrG0Nw6vRf1+itwf0Itft7LbMXs2g3Zs/NFmevjZGN1x7K3Q95GmIjWbQZTVerxiBxI+0g==
+
+vue-pull-to@^0.1.8:
+  version "0.1.8"
+  resolved "https://registry.yarnpkg.com/vue-pull-to/-/vue-pull-to-0.1.8.tgz#00914cf32951230564a05549577f2cd18cd0e56e"
+  integrity sha512-mANDhY4xpK6FCpStz7oAkeKCw8K1SNu+DSvXLjLdj/oTiapKPqS2RmK+vv4d2z6wJ1VaL5ZWyp6O0Vuugus1Qg==
 
 vue-router@^3.5.1:
   version "3.5.3"
