@@ -200,7 +200,8 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      theme_color: "#B5179E"
+      theme_color: "#BD632F",
+      nativeUI: true,
     },
     manifest: {
       name: "CamerSwap",
