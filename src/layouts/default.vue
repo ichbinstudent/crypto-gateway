@@ -77,39 +77,26 @@ export default Vue.extend({
       value: "wallet"
     };
   },
-  computed: {
-    route() {
-      return (
-        this.$route.fullPath
-          .slice(1)
-          .split("?")[0]
-          .split("/")
-          .map((value) => this.$options.filters.capitalize(value))
-          .join(" > ") ?? "home"
-      );
-    }
-  },
   async created() {
     const t = 1000;
 
-    function rejectDelay(reason) {
+    function rejectDelay(reason: any) {
       return new Promise(function(resolve, reject) {
         setTimeout(reject.bind(null, reason), t);
       });
     }
 
     const max = 5;
-    let p = Promise.reject();
+    let p = Promise.reject<unknown>();
 
     for (let i = 0; i < max; i++) {
-      p = p
-        .catch(() => {
-          this.$store.dispatch("coins/fetchCoins")
-            .then(() => {
-              if (this.$auth.loggedIn)
-                this.$store.dispatch("wallet/updateWallet");
-            });
-        })
+      p = p.catch(() => {
+        this.$store.dispatch("coins/fetchCoins")
+          .then(() => {
+            if (this.$auth.loggedIn)
+              this.$store.dispatch("wallet/updateWallet");
+          });
+      })
         .catch(rejectDelay);
     }
     // p = p.then(processResult).catch(errorHandler)
