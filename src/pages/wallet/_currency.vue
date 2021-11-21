@@ -258,7 +258,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: `Wallet - ${(this as any).coin.name}`
+      title: `${this.$t('wallet.wallet')} - ${(this as any).coin.name}`
     };
   },
   computed: {

@@ -1,6 +1,6 @@
 <template>
   <v-container class="py-4">
-    <h2 class="text-center text-h4 text-lg-h2 mb-2">Reset your password</h2>
+    <h2 class="text-center text-h4 text-lg-h2 mb-2">{{ $t('auth.reset.resetYourPassword') }}</h2>
     <v-card class="pa-2 mx-auto rounded-lg" flat max-width="600">
 
       <v-card-text>
@@ -9,29 +9,31 @@
           v-model="valid"
           @submit.prevent="resetPassword"
         >
-          <v-text-field
-            v-model="username"
-            type="email"
-            name="username"
-            label="Phone"
+          <VueTelInputVuetify
             outlined
-            aria-label="Phone"
-            :rules="[rules.required, rules.emailMatch]"
+            :rules="[rules.required]"
+            :label="$t('auth.phone')"
+            :aria-label="$t('auth.phone')"
+            select-classes="rounded-lg mr-1"
+            text-field-classes="rounded-lg"
+            :preferred-countries="['cm', 'de', 'fr']"
+            :valid-characters-only="true"
+            @input="onNumberInput"
           />
           <v-btn
             type="submit"
             :loading="loading"
             :disabled="!valid"
+            color="primary"
             block
             large
-          >
-            Reset Password
-          </v-btn>
+            v-text="$t('auth.reset.reset')"
+          />
         </v-form>
 
         <v-responsive class="text-center mt-2 text-body-2">
           <nuxt-link :to="localeLocation({name: 'auth'})">
-            Go back to login
+            {{ $t('auth.reset.backToLogin') }}
           </nuxt-link>
         </v-responsive>
       </v-card-text>
@@ -42,8 +44,10 @@
 <script lang="ts">
 import Vue from "vue";
 import rules from "~/pages/auth/rules";
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
 
 export default Vue.extend({
+  components: { VueTelInputVuetify },
   name: "ResetPassword",
   auth: "guest",
   data() {
@@ -58,6 +62,9 @@ export default Vue.extend({
     title: "Reset Password"
   },
   methods: {
+    onNumberInput (_: string, { number }: any) {
+      this.username = number.international
+    },
     resetPassword() {
       this.loading = true;
       this.$axios.post("/user/reset/", { username: this.username })

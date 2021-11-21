@@ -1,6 +1,6 @@
 <template>
   <v-container id="main-container">
-    <h2 class="text-2xl mb-2">Fiat</h2>
+    <h2 class="text-2xl mb-2">{{ $t('wallet.fiat') }}</h2>
     <template v-if="fiat.length > 0">
       <AssetCard
         v-for="(item, index) in fiat"
@@ -17,7 +17,7 @@
         :class="i === 3 ? '' : 'mb-2'"
       />
     </template>
-    <h2 class="text-2xl my-2">Crypto</h2>
+    <h2 class="text-2xl my-2">{{ $t('wallet.crypto') }}</h2>
     <template v-if="crypto.length > 0">
       <AssetCard
         v-for="(item, index) in crypto"
@@ -40,7 +40,7 @@
 <script lang="ts">
 import Vue from "vue";
 import AssetCard from "~/components/wallet/AssetCard.vue";
-import { Wallet, WalletEntry } from "~/types/interfaces";
+import { WalletEntry } from "~/types/interfaces";
 const PullToRefresh = require('pulltorefreshjs');
 
 
@@ -53,7 +53,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: "Wallet"
+      title: this.$t('wallet.wallet').toString()
     };
   },
   computed: {

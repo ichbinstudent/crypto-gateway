@@ -3,8 +3,8 @@
     <v-card class="px-0 sm:px-2 py-2 mx-auto rounded-lg" flat max-width="600">
       <v-card-title class="mb-4">
         <v-btn-toggle color="primary" class="mx-auto" v-model="view" mandatory denseq rounded>
-          <v-btn value="signin">Sign In</v-btn>
-          <v-btn value="signup">Sign Up</v-btn>
+          <v-btn value="signin" v-text="$t('auth.signInBtn')" />
+          <v-btn value="signup" v-text="$t('auth.signUpBtn')" />
         </v-btn-toggle>
       </v-card-title>
       <v-card-text v-if="view === 'signin'">
@@ -135,6 +135,7 @@ import { Snack } from "~/types/interfaces";
 import rules from "./rules";
 import { mapGetters } from "vuex";
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
+import {MetaInfo} from 'vue-meta'
 
 
 interface Phone {
@@ -170,6 +171,11 @@ export default Vue.extend({
         phone_valid: false
       }
     };
+  },
+  head (): MetaInfo {
+    return {
+      title: (this as any).view === 'signin' ? this.$t('auth.signInBtn') : this.$t('auth.signUpBtn')
+    } as MetaInfo
   },
   computed: {
     ...mapGetters({

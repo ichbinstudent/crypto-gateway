@@ -6,10 +6,10 @@
         borderless
         v-model="selectedDays"
       >
-        <v-btn text :value="1" small class="chart-button">1D</v-btn>
-        <v-btn text :value="7" small class="chart-button">7D</v-btn>
-        <v-btn text :value="30" small class="chart-button">30D</v-btn>
-        <v-btn text :value="365" small class="chart-button">1Y</v-btn>
+        <v-btn text :value="1" small class="chart-button">1{{$t('components.wallet.CryptoChart.day')}}</v-btn>
+        <v-btn text :value="7" small class="chart-button">7{{$t('components.wallet.CryptoChart.day')}}</v-btn>
+        <v-btn text :value="30" small class="chart-button">30{{$t('components.wallet.CryptoChart.day')}}</v-btn>
+        <v-btn text :value="365" small class="chart-button">1{{$t('components.wallet.CryptoChart.year')}}</v-btn>
       </v-btn-toggle>
     </div>
     <client-only v-if="values.length > 0 && !loading">

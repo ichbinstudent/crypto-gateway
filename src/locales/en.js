@@ -27,7 +27,10 @@ export default {
       submit: "Submit",
       cancel: "Cancel",
       transactions: "Transactions"
-    }
+    },
+    wallet: 'Wallet',
+    fiat: 'Fiat',
+    crypto: 'Crypto',
   },
 
   settings: {
@@ -39,20 +42,8 @@ export default {
   },
 
   auth: {
-    termsAndPrivacySignIn: 'By signing in, you agree to the <a\n' +
-      'class="font-semibold"\n' +
-      'href="https://www.iubenda.com/privacy-policy/72352797"\n' +
-      'target="_blank" rel="noopener noreferrer">Privacy Policy</a> and the\n' +
-      '<a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797"\n' +
-      'target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.',
-    termsAndPrivacySignUp: 'I have read and I agree to the <a\n' +
-      'class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797"\n' +
-      'target="_blank" rel="noopener noreferrer"\n' +
-      '>Privacy Policy</a> and the\n' +
-      '<a class="font-semibold"\n' +
-      'href="https://www.iubenda.com/terms-and-conditions/72352797"\n' +
-      'target="_blank" rel="noopener noreferrer"\n' +
-      '>Terms and Conditions</a>.',
+    termsAndPrivacySignIn: 'By signing in, you agree to the <a class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and the <a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>',
+    termsAndPrivacySignUp: 'I have read and I agree to the <a class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797" target="_blank" rel="noopener noreferrer" >Privacy Policy</a> and the <a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.',
     forgotPassword: 'Forgot your password?',
 
     firstName: 'First name',
@@ -63,13 +54,36 @@ export default {
     signInBtn: 'Sign in',
     signUpBtn: 'Sign up',
 
+    reset: {
+      resetYourPassword: 'Reset your password',
+      reset: 'Reset',
+      backToLogin: 'Go back to login'
+    }
   },
 
   components: {
     wallet: {
       TransactionList: {
-        NoTransactions: "No transactions yet."
+        NoTransactions: 'No transactions yet.'
+      },
+      CryptoChart: {
+        day: 'D',
+        year: 'Y'
+      },
+      SwapConfirmationDialog: {
+        title: 'Confirm Swap',
+        swapAmount: 'Swap amount:',
+        fees: 'Fees:',
+        totalReceived: 'Total received:',
+        offerValid: 'This offer is valid for {seconds} seconds.',
+        offerExpired: 'Offer has expired. Go back and try again.',
+        confirm: 'Confirm'
       }
     }
+  },
+
+  defaultLayout: {
+    wallet: "Wallet",
+    settings: "Settings"
   }
 };

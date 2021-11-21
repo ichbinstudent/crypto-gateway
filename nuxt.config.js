@@ -11,7 +11,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s | CIA",
+    titleTemplate: "%s | CamerSwap",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -19,27 +19,13 @@ export default {
       { name: "format-detection", content: "telephone=no" }
     ],
     link: [
-      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      // { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       {
         rel: "stylesheet",
         type: "text/css",
         href: "//fonts.googleapis.com/css?family=Maven+Pro"
       }
     ],
-    // script: [
-    //   {
-    //     src: "//cdn.plutio.com/messenger/main.js",
-    //     async: true,
-    //     defer: true,
-    //     callback: () => {
-    //       window['$plutio_msg'] = function () {
-    //         (window['$plutio_msg'].q = window['$plutio_msg'].q || []).push(arguments);
-    //       };
-    //       window.$plutio_msg('WkJJSuArLLBAchu6Z', { });
-    //
-    //     }
-    //   }
-    // ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

@@ -1,10 +1,11 @@
 <template>
   <v-app id="crypto-gateway">
     <v-app-bar app fixed color="primary" dark>
-      <v-app-bar-title>
-        <!-- {{ route }} -->
-        CamerSwap
-      </v-app-bar-title>
+      <v-avatar rounded>
+        <v-img :src="$icon(64)" />
+      </v-avatar>
+      <v-spacer />
+      <v-app-bar-title>CamerSwap</v-app-bar-title>
       <v-spacer />
       <v-app-bar-nav-icon light @click="$router.back()">
         <v-icon color="surface">mdi-arrow-left</v-icon>
@@ -33,7 +34,7 @@
           :ripple="false"
           prefetch
         >
-          <span>Wallet</span>
+          <span>{{ $t('defaultLayout.wallet') }}</span>
           <v-icon>mdi-wallet</v-icon>
         </v-btn>
 
@@ -45,7 +46,7 @@
           :ripple="false"
           prefetch
         >
-          <span>Settings</span>
+          <span>{{ $t('defaultLayout.settings') }}</span>
           <v-icon>mdi-tune</v-icon>
         </v-btn>
       </v-bottom-navigation>

@@ -8,26 +8,26 @@
   >
     <v-sheet color="surface" class="w-screen h-screen">
       <v-toolbar dark color="primary">
-        <v-toolbar-title>Confirm Swap</v-toolbar-title>
+        <v-toolbar-title>{{ $t('components.wallet.SwapConfirmationDialog.title') }}</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-icon dark @click="localShow = false" class="p-1">mdi-close</v-icon>
       </v-toolbar>
 
       <v-list color="transparent">
         <v-list-item>
-          <span>Swap amount:</span>
+          <span>{{ $t('components.wallet.SwapConfirmationDialog.swapAmount') }}</span>
           <v-spacer />
           <span>{{ transaction.amount_in | formatCurrency(coin_in.symbol) }}</span>
         </v-list-item>
         <v-divider />
         <v-list-item>
-          <span>Fees:</span>
+          <span>{{ $t('components.wallet.SwapConfirmationDialog.fees') }}</span>
           <v-spacer />
           <span>{{ transaction.fees | formatCurrency(coin_out.symbol) }}</span>
         </v-list-item>
         <v-divider />
         <v-list-item class="text-lg">
-          <span>Total received:</span>
+          <span>{{ $t('components.wallet.SwapConfirmationDialog.totalReceived') }}</span>
           <v-spacer />
           <span>{{ transaction.amount_out | formatCurrency(coin_out.symbol) }}</span>
         </v-list-item>
@@ -36,10 +36,12 @@
 
 
     <div class="fixed bottom-4 w-screen px-4 text-center">
-      <span v-if="timeLeft > 0">This offer is valid for {{ timeLeft.toFixed(1) }} seconds.</span>
-      <span v-else>Offer has expired. Go back and try again.</span>
+      <span v-if="timeLeft > 0">
+        {{ $t('components.wallet.SwapConfirmationDialog.offerValid', {seconds: timeLeft.toFixed(1)}) }}
+      </span>
+      <span v-else>{{ $t('components.wallet.SwapConfirmationDialog.offerExpired') }}</span>
       <v-btn block large color="primary" @click="confirmTransaction" :disabled="timeLeft <= 0">
-        Confirm
+        {{ $t('components.wallet.SwapConfirmationDialog.confirm') }}
       </v-btn>
     </div>
   </v-dialog>
