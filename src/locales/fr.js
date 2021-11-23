@@ -59,11 +59,11 @@ export default {
           depositAddresses: [
             {
               text: "Orange",
-              value: "+XXX XXXX XXXXXX"
+              value: "+237 691 882516"
             },
             {
               text: "MTN",
-              value: "+XXX XXXX XXXXXX"
+              value: "+237 676 517853"
             }
           ],
           text: "Veuillez envoyer l'argent sur le bon compte momo ci-dessous."
