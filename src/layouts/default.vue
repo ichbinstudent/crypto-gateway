@@ -7,7 +7,7 @@
       <v-spacer />
         <img
           alt="Logo"
-          class="h-12 bg-contain"
+          class="h-8"
           src="~/assets/logo_text.svg"
         />
 <!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
