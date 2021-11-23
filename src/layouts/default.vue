@@ -2,10 +2,16 @@
   <v-app id="crypto-gateway">
     <v-app-bar app fixed color="primary" dark>
       <v-avatar rounded>
-        <v-img :src="$icon(64)" />
+<!--        <v-img :src="$icon(64)" />-->
       </v-avatar>
       <v-spacer />
-      <v-app-bar-title>CamerSwap</v-app-bar-title>
+        <nuxt-img
+          class="h-12"
+          fit="contain"
+          provider="static"
+          src="/logo_text.svg"
+        />
+<!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
       <v-spacer />
       <v-app-bar-nav-icon light @click="$router.back()">
         <v-icon color="surface">mdi-arrow-left</v-icon>
