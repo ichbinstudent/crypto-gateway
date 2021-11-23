@@ -121,7 +121,7 @@
 
       <div class="text-center mt-2 text-body-2">
         <nuxt-link :to="localeLocation({name: 'auth-reset'})">
-          {{ $t('auth.forgotPassword') }}
+          {{ $t("auth.forgotPassword") }}
         </nuxt-link>
       </div>
 
@@ -138,9 +138,9 @@ import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.
 import { MetaInfo } from "vue-meta/types";
 
 interface Phone {
-  number: any
-  valid: boolean
-  country: any
+  number: any;
+  valid: boolean;
+  country: any;
 }
 
 export default Vue.extend({
@@ -162,7 +162,7 @@ export default Vue.extend({
         password: "",
         password2: "",
         terms_and_privacy: false,
-        phone_valid: false,
+        phone_valid: false
       },
       credentials: {
         phone: "",
@@ -171,10 +171,10 @@ export default Vue.extend({
       }
     };
   },
-  head (): MetaInfo {
+  head(): MetaInfo {
     return {
-      title: (this as any).view === 'signin' ? this.$t('auth.signInBtn') : this.$t('auth.signUpBtn')
-    } as MetaInfo
+      title: (this as any).view === "signin" ? this.$t("auth.signInBtn") : this.$t("auth.signUpBtn")
+    } as MetaInfo;
   },
   computed: {
     ...mapGetters({
@@ -183,11 +183,11 @@ export default Vue.extend({
     })
   },
   methods: {
-    onNumberSignInInput (_: string, { number }: Phone): void {
-      this.credentials.phone = number.international
+    onNumberSignInInput(_: string, { number }: Phone): void {
+      this.credentials.phone = number.international;
     },
-    onNumberSignUpInput (_: string, { number }: Phone): void {
-      this.new_credentials.phone = number.international
+    onNumberSignUpInput(_: string, { number }: Phone): void {
+      this.new_credentials.phone = number.international;
     },
     same_password_rule(v: String): string | boolean {
       return v === this.new_credentials.password ?? "Passwords have to match";
@@ -200,12 +200,8 @@ export default Vue.extend({
       this.loading = true;
       this.$auth.loginWith("custom", { data: credentials })
         .then(() => {
-          this.$store.dispatch("wallet/updateWallet");
-          setTimeout(() => {
-            if (this.$auth.loggedIn && this.$route.name === "auth") {
-              this.$router.push(this.localePath({ name: "wallet" }));
-            }
-          }, 1000);
+          this.$store.dispatch("wallet/updateWallet")
+          this.$router.push(this.localePath({name: 'wallet'}))
         })
         .catch(() => {
           this.$store.commit("snackbar/setSnack", { message: "Invalid credentials", color: "error", icon: "error" });
