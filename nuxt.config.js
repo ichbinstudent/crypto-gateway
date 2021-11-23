@@ -110,6 +110,8 @@ export default {
       logout: "/auth",
       home: "/wallet"
     },
+    rewriteRedirects: false,
+    optimizeCSS: false,
     strategies: {
       custom: {
         scheme: "refresh",

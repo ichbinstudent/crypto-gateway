@@ -9,15 +9,17 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@mdi/font": "5.9.55",
+    "@mdi/font": "^6.5.95",
     "@nuxt/image": "^0.6.0",
-    "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
+    "@nuxtjs/auth-next": "5.0.0-1637333559.35dbd53",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/i18n": "^7.2.0",
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/vuetify": "^1.12.1",
-    "core-js": "^3.15.1",
-    "nuxt": "^2.15.8"
+    "core-js": "^3.19.1",
+    "nuxt": "^2.15.8",
+    "sharp": "https://registry.yarnpkg.com/@favware/skip-dependency/-/skip-dependency-1.0.2.tgz",
+    "vue-meta": "^2.4.0"
   },
   "devDependencies": {
     "@coingecko/cryptoformat": "^0.4.4",

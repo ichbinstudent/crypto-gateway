@@ -5,11 +5,10 @@
 <!--        <v-img :src="$icon(64)" />-->
       </v-avatar>
       <v-spacer />
-        <nuxt-img
-          class="h-12"
-          fit="contain"
-          provider="static"
-          src="/logo_text.svg"
+        <img
+          alt="Logo"
+          class="h-12 bg-contain"
+          src="~/assets/logo_text.svg"
         />
 <!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
       <v-spacer />

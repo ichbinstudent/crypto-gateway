@@ -135,8 +135,7 @@ import { Snack } from "~/types/interfaces";
 import rules from "./rules";
 import { mapGetters } from "vuex";
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
-import {MetaInfo} from 'vue-meta'
-
+import { MetaInfo } from "vue-meta/types";
 
 interface Phone {
   number: any
@@ -184,16 +183,16 @@ export default Vue.extend({
     })
   },
   methods: {
-    onNumberSignInInput (_: string, { number }: Phone) {
+    onNumberSignInInput (_: string, { number }: Phone): void {
       this.credentials.phone = number.international
     },
-    onNumberSignUpInput (_: string, { number }: Phone) {
+    onNumberSignUpInput (_: string, { number }: Phone): void {
       this.new_credentials.phone = number.international
     },
     same_password_rule(v: String): string | boolean {
       return v === this.new_credentials.password ?? "Passwords have to match";
     },
-    signIn() {
+    signIn(): void {
       const credentials = {
         username: this.credentials.phone.replaceAll(" ", ""),
         password: this.credentials.password
@@ -213,7 +212,7 @@ export default Vue.extend({
         })
         .finally(() => this.loading = false);
     },
-    smsVerification() {
+    smsVerification(): void {
       this.loading = true;
       this.$axios.post("/auth/user/verify/", {
         phone: this.signupPhone,
@@ -224,7 +223,7 @@ export default Vue.extend({
         this.view = "signin";
       }).finally(() => this.loading = false);
     },
-    signUp() {
+    signUp(): void {
       if (!this.new_credentials.terms_and_privacy) {
         this.$store.commit("snackbar/setSnack", {
           message: "Please accept the terms of service and our privacy policy.",
@@ -258,7 +257,7 @@ export default Vue.extend({
         } as Snack))
         .finally(() => this.loading = false);
     },
-    cancelVerification() {
+    cancelVerification(): void {
       this.$store.commit("settings/setSignupState", { step: 0, phone: "" });
       this.view = "signin";
     }
