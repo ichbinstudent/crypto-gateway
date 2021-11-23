@@ -11,8 +11,8 @@ export default {
         xaf: {
           text: "Please send the money to the right momo account below.",
           depositAddresses: [
-            { text: "Orange", value: "+XXX XXXX XXXXXX" },
-            { text: "MTN", value: "+XXX XXXX XXXXXX" }
+            { text: "Orange", value: "+237 691 882516" },
+            { text: "MTN", value: "+237 676 517853" }
           ]
         }
       },
