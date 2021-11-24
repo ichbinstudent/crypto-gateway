@@ -1,4 +1,19 @@
 export default {
+  help: {
+    title: "Help",
+    tutorials: 'Tutorials',
+    howToDepositFcfa: "How to deposit FCFA",
+    howToDepositCrypto: "How to deposit cryptocurrencies",
+    howToSwap: "How to swap different currencies",
+    howToWithdrawFcfa: "How to withdraw FCFA",
+    howToWithdrawCrypto: "How to withdraw cryptocurrencies",
+
+    contactUs: "Need help? Contact us!",
+    phoneOrange: "+237 691 882516",
+    phoneMtn: "+237 676 517853",
+    useOurChat: 'You can also chat with us by clicking the chat icon on the bottom left.'
+  },
+
   wallet: {
     _currency: {
       amount: "Amount to deposit",
@@ -28,9 +43,9 @@ export default {
       cancel: "Cancel",
       transactions: "Transactions"
     },
-    wallet: 'Wallet',
-    fiat: 'Fiat',
-    crypto: 'Crypto',
+    wallet: "Wallet",
+    fiat: "Fiat",
+    crypto: "Crypto"
   },
 
   settings: {
@@ -42,42 +57,42 @@ export default {
   },
 
   auth: {
-    termsAndPrivacySignIn: 'By signing in, you agree to the <a class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and the <a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>',
-    termsAndPrivacySignUp: 'I have read and I agree to the <a class="font-semibold" href="https://www.iubenda.com/privacy-policy/72352797" target="_blank" rel="noopener noreferrer" >Privacy Policy</a> and the <a class="font-semibold" href="https://www.iubenda.com/terms-and-conditions/72352797" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>.',
-    forgotPassword: 'Forgot your password?',
+    termsAndPrivacySignIn: "By signing in, you agree to the <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Privacy Policy</a> and the <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Terms and Conditions</a>",
+    termsAndPrivacySignUp: "I have read and I agree to the <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\" >Privacy Policy</a> and the <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Terms and Conditions</a>.",
+    forgotPassword: "Forgot your password?",
 
-    firstName: 'First name',
-    lastName: 'Last name',
-    phone: 'Phone number',
-    password: 'Password',
-    repeatPassword: 'Repeat the password',
-    signInBtn: 'Sign in',
-    signUpBtn: 'Sign up',
+    firstName: "First name",
+    lastName: "Last name",
+    phone: "Phone number",
+    password: "Password",
+    repeatPassword: "Repeat the password",
+    signInBtn: "Sign in",
+    signUpBtn: "Sign up",
 
     reset: {
-      resetYourPassword: 'Reset your password',
-      reset: 'Reset',
-      backToLogin: 'Go back to login'
+      resetYourPassword: "Reset your password",
+      reset: "Reset",
+      backToLogin: "Go back to login"
     }
   },
 
   components: {
     wallet: {
       TransactionList: {
-        NoTransactions: 'No transactions yet.'
+        NoTransactions: "No transactions yet."
       },
       CryptoChart: {
-        day: 'D',
-        year: 'Y'
+        day: "D",
+        year: "Y"
       },
       SwapConfirmationDialog: {
-        title: 'Confirm Swap',
-        swapAmount: 'Swap amount:',
-        fees: 'Fees:',
-        totalReceived: 'Total received:',
-        offerValid: 'This offer is valid for {seconds} seconds.',
-        offerExpired: 'Offer has expired. Go back and try again.',
-        confirm: 'Confirm'
+        title: "Confirm Swap",
+        swapAmount: "Swap amount:",
+        fees: "Fees:",
+        totalReceived: "Total received:",
+        offerValid: "This offer is valid for {seconds} seconds.",
+        offerExpired: "Offer has expired. Go back and try again.",
+        confirm: "Confirm"
       }
     }
   },

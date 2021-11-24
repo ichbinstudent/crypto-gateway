@@ -1,13 +1,15 @@
 <template>
   <v-app id="crypto-gateway">
-    <v-app-bar app fixed color="primary" dark>
-      <v-avatar rounded>
-<!--        <v-img :src="$icon(64)" />-->
-      </v-avatar>
+    <v-app-bar app fixed color="primary" dark class="px-0">
+        <v-app-bar-nav-icon light :to="localePath('help')">
+          <v-icon color="surface">mdi-help-circle</v-icon>
+        </v-app-bar-nav-icon>
       <v-spacer />
         <img
           alt="Logo"
           class="h-8"
+          height="32"
+          width="130"
           src="~/assets/logo_text.svg"
         />
 <!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
@@ -107,10 +109,10 @@ export default Vue.extend({
     }
     // p = p.then(processResult).catch(errorHandler)
 
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any;
-    if (element) {
-      element.style.display = "none";
-    }
+    // const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any;
+    // if (element) {
+    //   element.style.display = "none";
+    // }
   }
 });
 </script>

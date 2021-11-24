@@ -90,19 +90,6 @@ export default Vue.extend({
     version(): string {
       return `${process.env.NUXT_ENV_VERSION} ${process.env.NUXT_ENV_COMMIT_HASH}`;
     }
-  },
-  mounted() {
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any
-    if (element) {
-      element.style.display = "inherit";
-    }
-  },
-  beforeRouteLeave(_1, _2, next) {
-    const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any
-    if (element) {
-      element.style.display = "none";
-    }
-    next();
   }
 });
 </script>
