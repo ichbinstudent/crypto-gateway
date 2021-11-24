@@ -32,7 +32,7 @@
             {{ item.resourcetype === "Swap" && item.currency_in === coin.id ? "-" : "+" }}
             {{
                 (item.resourcetype === "Swap" && item.currency_in === coin.id ? item.amount_in : item.amount_out) | formatCurrency(coin.symbol)
-              }}
+            }}
             </span>
           </v-list-item-title>
           <v-list-item-subtitle>
@@ -49,7 +49,7 @@
     </template>
   </v-list>
   <div v-else class="w-full text-center pt-4">
-    <span>{{ $t('components.wallet.TransactionList.NoTransactions') }}</span>
+    <span>{{ $t("components.wallet.TransactionList.NoTransactions") }}</span>
   </div>
 </template>
 

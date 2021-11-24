@@ -22,6 +22,7 @@
     <v-main>
       <Snackbar />
       <Nuxt />
+      <v-container fluid></v-container>
     </v-main>
 
     <v-container>
