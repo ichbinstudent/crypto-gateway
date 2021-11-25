@@ -40,6 +40,19 @@ export default {
     settings: "Paramètres",
     wallet: "Portefeuille"
   },
+  help: {
+    contactUs: "Vous avez besoin d'aide ? Contactez nous !",
+    howToDepositCrypto: "Comment déposer des cryptomonnaies",
+    howToDepositFcfa: "Comment déposer des FCFA",
+    howToSwap: "Comment échanger différentes devises",
+    howToWithdrawCrypto: "Comment retirer des cryptomonnaies",
+    howToWithdrawFcfa: "Comment retirer des FCFA",
+    phoneMtn: "+237 676 517853",
+    phoneOrange: "+237 691 882516",
+    title: "Aide",
+    tutorials: "Tutoriels",
+    useOurChat: "Vous pouvez également chatter avec nous en cliquant sur l'icône de chat en bas à gauche."
+  },
   settings: {
     currency: "Devise",
     darkMode: "Mode sombre",
