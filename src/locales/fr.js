@@ -1,56 +1,56 @@
 export default {
   auth: {
-    firstName: "First name",
-    forgotPassword: "Forgot your password?",
-    lastName: "Last name",
-    password: "Password",
-    phone: "Phone number",
-    repeatPassword: "Repeat the password",
+    firstName: "Prénom",
+    forgotPassword: "Mot de passe oublié ?",
+    lastName: "Nom",
+    password: "Mot de passe",
+    phone: "Numéro de téléphone",
+    repeatPassword: "Répéter le mot de passe",
     reset: {
-      backToLogin: "Go back to login",
-      reset: "Reset",
-      resetYourPassword: "Reset your password"
+      backToLogin: "Retourner à la connexion",
+      reset: "Réinitialiser",
+      resetYourPassword: "Réinitialisez votre mot de passe"
     },
-    signInBtn: "Sign in",
-    signUpBtn: "Sign up",
-    termsAndPrivacySignIn: "By signing in, you agree to the <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Privacy Policy</a> and the <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Terms and Conditions</a>",
-    termsAndPrivacySignUp: "I have read and I agree to the <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\" >Privacy Policy</a> and the <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Terms and Conditions</a>."
+    signInBtn: "Se connecter",
+    signUpBtn: "S'inscrire",
+    termsAndPrivacySignIn: "En vous connectant, vous acceptez la <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Politique de confidentialité</a> et les <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Termes et conditions</a>.",
+    termsAndPrivacySignUp: "J'ai lu et j'accepte la <a class=\"font-semibold\" href=\"https://www.iubenda.com/privacy-policy/72352797\" target=\"_blank\" rel=\"noopener noreferrer\" >Politique de confidentialité</a> et les <a class=\"font-semibold\" href=\"https://www.iubenda.com/terms-and-conditions/72352797\" target=\"_blank\" rel=\"noopener noreferrer\">Termes et conditions</a>."
   },
   components: {
     wallet: {
       CryptoChart: {
-        day: "D",
-        year: "Y"
+        day: "J",
+        year: "A"
       },
       SwapConfirmationDialog: {
-        confirm: "Confirm",
-        fees: "Fees:",
-        offerExpired: "Offer has expired. Go back and try again.",
-        offerValid: "This offer is valid for {seconds} seconds.",
-        swapAmount: "Swap amount:",
-        title: "Confirm Swap",
-        totalReceived: "Total received:"
+        confirm: "Confirmer",
+        fees: "Frais :",
+        offerExpired: "L'offre a expiré. Retournez-y et réessayez.",
+        offerValid: "Cette offre est valable pendant {seconds} secondes.",
+        swapAmount: "Montant du swap :",
+        title: "Confirmer l'échange",
+        totalReceived: "Total reçu :"
       },
       TransactionList: {
-        NoTransactions: "No transactions yet."
+        NoTransactions: "Aucune transaction pour le moment."
       }
     }
   },
   defaultLayout: {
-    settings: "Settings",
-    wallet: "Wallet"
+    settings: "Paramètres",
+    wallet: "Portefeuille"
   },
   settings: {
-    currency: "Currency",
-    darkMode: "Dark Mode",
-    language: "Language",
-    phone: "Phone:",
-    signOut: "Sign out"
+    currency: "Devise",
+    darkMode: "Mode sombre",
+    language: "Langue",
+    phone: "Numéro de téléphone :",
+    signOut: "Se déconnecter"
   },
   wallet: {
     _currency: {
       amount: "Montant à déposer",
-      cancel: "Cancel",
+      cancel: "Annuler",
       deposit: "Dépôt",
       depositDetails: "Détails du dépôt",
       depositHelpText: "Veuillez saisir le montant que vous souhaitez déposer ci-dessous afin que nous puissions traiter votre transaction plus rapidement.",
@@ -70,18 +70,18 @@ export default {
         }
       },
       depositNotAvailable: "Le dépôt de cette monnaie n'est pas disponible.",
-      submit: "Submit",
+      submit: "Envoyer",
       transactions: "Transactions",
       weWillProcess: "Nous traiterons votre transaction dans les 24 heures.",
-      withdraw: "Withdraw",
-      withdrawAddress: "The address of your wallet",
-      withdrawAmount: "Amount to withdraw",
-      withdrawDetails: "Withdrawal Information",
-      withdrawFiat: "The money will be sent to the MOMO account of the phone number you signed up with.",
-      withdrawNetwork: "The network to use"
+      withdraw: "Retirer",
+      withdrawAddress: "L'adresse de votre portefeuille",
+      withdrawAmount: "Montant à retirer",
+      withdrawDetails: "Informations sur les retraits",
+      withdrawFiat: "L'argent sera envoyé sur le compte MOMO du numéro de téléphone avec lequel vous vous êtes inscrit.",
+      withdrawNetwork: "Le réseau à utiliser"
     },
     crypto: "Crypto",
     fiat: "Fiat",
-    wallet: "Wallet"
+    wallet: "Portefeuille"
   }
 } ;
