@@ -32,6 +32,7 @@ import Vue from "vue";
 import { MetaInfo } from "vue-meta/types";
 
 export default Vue.extend({
+  auth: false,
   head(): MetaInfo {
     return {
       title: this.$t("help.title").toString()

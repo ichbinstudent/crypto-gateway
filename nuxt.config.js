@@ -189,7 +189,7 @@ export default {
   pwa: {
     meta: {
       theme_color: "#BD632F",
-      nativeUI: true,
+      nativeUI: true
     },
     manifest: {
       name: "CamerSwap",

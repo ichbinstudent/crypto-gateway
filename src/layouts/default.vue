@@ -1,18 +1,18 @@
 <template>
   <v-app id="crypto-gateway">
     <v-app-bar app fixed color="primary" dark class="px-0">
-        <v-app-bar-nav-icon light :to="localePath('help')">
-          <v-icon color="surface">mdi-help-circle</v-icon>
-        </v-app-bar-nav-icon>
+      <v-app-bar-nav-icon light :to="localePath('help')">
+        <v-icon color="surface">mdi-help-circle</v-icon>
+      </v-app-bar-nav-icon>
       <v-spacer />
-        <img
-          alt="Logo"
-          class="h-8"
-          height="32"
-          width="130"
-          src="~/assets/logo_text.svg"
-        />
-<!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
+      <img
+        alt="Logo"
+        class="h-8"
+        height="32"
+        width="130"
+        src="~/assets/logo_text.svg"
+      />
+      <!--      <v-app-bar-title>CamerSwap</v-app-bar-title>-->
       <v-spacer />
       <v-app-bar-nav-icon light @click="$router.back()">
         <v-icon color="surface">mdi-arrow-left</v-icon>
@@ -42,7 +42,7 @@
           :ripple="false"
           prefetch
         >
-          <span>{{ $t('defaultLayout.wallet') }}</span>
+          <span>{{ $t("defaultLayout.wallet") }}</span>
           <v-icon>mdi-wallet</v-icon>
         </v-btn>
 
@@ -54,7 +54,7 @@
           :ripple="false"
           prefetch
         >
-          <span>{{ $t('defaultLayout.settings') }}</span>
+          <span>{{ $t("defaultLayout.settings") }}</span>
           <v-icon>mdi-tune</v-icon>
         </v-btn>
       </v-bottom-navigation>

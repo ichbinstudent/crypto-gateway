@@ -269,7 +269,6 @@ export default Vue.extend({
       return ["eur", "xaf"].includes(this.$route.params.currency);
     },
     currency(): string {
-      console.log(this.$store.getters["settings/currency"])
       return this.$store.getters["settings/currency"];
     },
     availableForTrading(): boolean {
