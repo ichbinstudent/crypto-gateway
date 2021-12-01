@@ -114,6 +114,19 @@ export default Vue.extend({
     // if (element) {
     //   element.style.display = "none";
     // }
+
+    if (this.$auth.loggedIn) {
+      (window as any).$crisp.push(["set", "user:phone", [this.$auth.user?.username]]);
+      (window as any).$crisp.push(["set", "user:nickname", [`${this.$auth.user?.first_name} ${this.$auth.user?.last_name}`]]);
+    }
+  },
+  watch: {
+    "$auth.loggedIn"(val) {
+      if (val) {
+        (window as any).$crisp.push(["set", "user:phone", [this.$auth.user?.username]]);
+        (window as any).$crisp.push(["set", "user:nickname", [`${this.$auth.user?.first_name} ${this.$auth.user?.last_name}`]]);
+      }
+    }
   }
 });
 </script>

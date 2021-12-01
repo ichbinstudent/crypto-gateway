@@ -111,7 +111,7 @@ export default {
       home: "/wallet"
     },
     rewriteRedirects: false,
-    optimizeCSS: false,
+    optimizeCSS: true,
     strategies: {
       custom: {
         scheme: "refresh",
