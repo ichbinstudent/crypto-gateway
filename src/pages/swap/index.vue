@@ -170,6 +170,7 @@ import { TransactionTypes } from "~/types/ctypes";
 import { Snack, Swap, Wallet } from "~/types/interfaces";
 import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.vue";
 import { Location } from "vue-router";
+import { Decimal } from "decimal.js";
 
 const PullToRefresh = require("pulltorefreshjs");
 
@@ -309,8 +310,8 @@ export default Vue.extend({
         this.$axios.post<Swap>("/wallet/transaction/", {
           currency_in: this.pair.coin1.coin?.id,
           currency_out: this.pair.coin2.coin?.id,
-          amount_in: this.pair.coin1.amount,
-          amount_out: this.pair.coin2.amount,
+          amount_in: new Decimal(this.pair.coin1.amount).toPrecision(36),
+          amount_out: new Decimal(this.pair.coin2.amount).toPrecision(36),
           polymorphic_ctype: TransactionTypes.Swap,
           resourcetype: "Swap"
         })
