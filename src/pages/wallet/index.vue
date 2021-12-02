@@ -41,7 +41,7 @@
 import Vue from "vue";
 import AssetCard from "~/components/wallet/AssetCard.vue";
 import { WalletEntry } from "~/types/interfaces";
-const PullToRefresh = require('pulltorefreshjs');
+import PullToRefresh from "pulltorefreshjs";
 
 
 export default Vue.extend({

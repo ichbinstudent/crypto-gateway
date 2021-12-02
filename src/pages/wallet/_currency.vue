@@ -217,7 +217,7 @@ import rules from "~/pages/auth/rules";
 import { TransactionTypes } from "~/types/ctypes";
 import { Decimal } from "decimal.js";
 
-const PullToRefresh = require("pulltorefreshjs");
+import PullToRefresh from "pulltorefreshjs";
 
 
 export default Vue.extend({

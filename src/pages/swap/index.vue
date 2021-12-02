@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="main-container">
     <v-card class="rounded-lg mx-1" id="swap-card">
       <v-card-title>
         {{ $t("swap.swap") }}
@@ -172,7 +172,7 @@ import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.v
 import { Location } from "vue-router";
 import { Decimal } from "decimal.js";
 
-const PullToRefresh = require("pulltorefreshjs");
+import PullToRefresh from "pulltorefreshjs";
 
 
 export default Vue.extend({

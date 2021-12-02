@@ -18,7 +18,8 @@
     "@nuxtjs/vuetify": "^1.12.2",
     "core-js": "^3.19.2",
     "nuxt-edge": "latest",
-    "vue-meta": "^2.4.0"
+    "vue-meta": "^2.4.0",
+    "vue-pull-to": "^0.1.8"
   },
   "devDependencies": {
     "@coingecko/cryptoformat": "^0.4.4",
@@ -31,6 +32,7 @@
     "@nuxtjs/tailwindcss": "^4.2.1",
     "@nuxtjs/vercel-builder": "^0.22.1",
     "@ts-stack/markdown": "^1.4.0",
+    "@types/coingecko-api": "^1.0.4",
     "@types/pulltorefreshjs": "^0.1.5",
     "add": "^2.0.6",
     "coingecko-api": "^1.0.10",
@@ -42,7 +44,6 @@
     "pulltorefreshjs": "^0.1.22",
     "sass": "^1.44.0",
     "sass-loader": "^10.2.0",
-    "vue-pull-to": "^0.1.8",
     "vue-tel-input-vuetify": "^1.4.1",
     "yarn": "^1.22.17"
   }

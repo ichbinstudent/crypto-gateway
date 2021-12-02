@@ -2,8 +2,8 @@ import { GetterTree, MutationTree, ActionTree } from "vuex";
 import { Coin, Localization, MarketData } from "~/types/coingecko";
 import Vue from "vue";
 import moment from "moment";
+import CoinGecko from "coingecko-api";
 
-const CoinGecko = require("coingecko-api");
 const CoinGeckoClient = new CoinGecko();
 
 export const state = () => ({
@@ -29,7 +29,7 @@ export const mutations: MutationTree<State> = {
 
 export const actions: ActionTree<State, State> = {
   fetchCoins(context) {
-    context.commit("addFetching", "fetchCoins", { root: true })
+    context.commit("addFetching", "fetchCoins", { root: true });
     return new Promise((resolve, reject) => {
       CoinGeckoClient.coins.all()
         .then((value: { data: Coin[] }) => {
@@ -73,7 +73,7 @@ export const actions: ActionTree<State, State> = {
     context,
     args: { symbol: string; days: number }
   ): Promise<number[][]> {
-    context.commit("addFetching", "fetchCoinPrices", { root: true })
+    context.commit("addFetching", "fetchCoinPrices", { root: true });
     return new Promise((resolve) => {
       return CoinGeckoClient.coins
         .fetchMarketChart(args.symbol, {
