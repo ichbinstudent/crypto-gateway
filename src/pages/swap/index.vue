@@ -1,163 +1,166 @@
 <template>
-  <v-card class="rounded-lg mx-1" id="swap-card">
-    <v-card-title>
-      {{ $t("swap.swap") }}
-    </v-card-title>
-    <v-card-text class="pa-1">
-      <v-row dense>
-        <v-col>
-          <v-select :items="coin1coins" v-model="pair.coin1.coin" class="rounded-lg my-auto" solo hide-details>
-            <template v-slot:item="{ active, item, attrs, on }">
-              <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-1">
-                <v-list-item-icon class="ml-0 mr-1">
-                  <v-img
-                    v-if="item.image.small.includes('coingecko')"
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.small"
-                    class="my-auto"
-                  />
-                  <nuxt-img
-                    provider="cloudinary"
-                    v-else
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.large"
-                    class="my-auto"
-                  />
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ item.name }}
-                </v-list-item-title>
-              </v-list-item>
-            </template>
-            <template v-slot:selection="{ active, item, attrs, on }">
-              <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-0">
-                <v-list-item-icon class="mx-0 mr-1">
-                  <v-img
-                    v-if="item.image.small.includes('coingecko')"
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.small"
-                    class="my-auto"
-                  />
-                  <nuxt-img
-                    provider="cloudinary"
-                    v-else
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.large"
-                    class="my-auto"
-                  />
+  <div>
+    <v-card class="rounded-lg mx-1" id="swap-card">
+      <v-card-title>
+        {{ $t("swap.swap") }}
+      </v-card-title>
+      <v-card-text class="pa-1">
+        <v-row dense>
+          <v-col>
+            <v-select :items="coin1coins" v-model="pair.coin1.coin" class="rounded-lg my-auto" solo hide-details>
+              <template v-slot:item="{ active, item, attrs, on }">
+                <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-1">
+                  <v-list-item-icon class="ml-0 mr-1">
+                    <v-img
+                      v-if="item.image.small.includes('coingecko')"
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.small"
+                      class="my-auto"
+                    />
+                    <nuxt-img
+                      provider="cloudinary"
+                      v-else
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.large"
+                      class="my-auto"
+                    />
+                  </v-list-item-icon>
+                  <v-list-item-title>
+                    {{ item.name }}
+                  </v-list-item-title>
+                </v-list-item>
+              </template>
+              <template v-slot:selection="{ active, item, attrs, on }">
+                <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-0">
+                  <v-list-item-icon class="mx-0 mr-1">
+                    <v-img
+                      v-if="item.image.small.includes('coingecko')"
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.small"
+                      class="my-auto"
+                    />
+                    <nuxt-img
+                      provider="cloudinary"
+                      v-else
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.large"
+                      class="my-auto"
+                    />
 
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ item.symbol }}
-                </v-list-item-title>
-              </v-list-item>
-            </template>
-          </v-select>
-        </v-col>
-        <v-col>
-          <v-text-field v-model="pair.coin1.amount" hide-details class="rounded-lg" type="number">
-            <template #label>
-              <span @click="pair.coin1.amount = wallet[pair.coin1.coin.id].amount" class="cursor-pointer">MAX</span>
-            </template>
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <div class="text-center mx-auto p-0 -my-3">
-        <v-btn
-          @click="swapCurrencies"
-          icon
-          x-large
-          class="mx-auto p-0 my-auto border-0"
-        >
-          <v-icon large>
-            mdi-swap-vertical
-          </v-icon>
-        </v-btn>
-      </div>
-      <v-row dense>
-        <v-col>
-          <v-select :items="coin2coins" v-model="pair.coin2.coin" class="rounded-lg my-auto" solo hide-details>
-            <template v-slot:item="{ active, item, attrs, on }">
-              <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-1">
-                <v-list-item-icon class="ml-0 mr-1">
-                  <v-img
-                    v-if="item.image.small.includes('coingecko')"
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.small"
-                    class="my-auto"
-                  />
-                  <nuxt-img
-                    provider="cloudinary"
-                    v-else
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.large"
-                    class="my-auto"
-                  />
-                </v-list-item-icon>
-                <v-list-item-title>
-                  {{ item.name }}
-                </v-list-item-title>
-              </v-list-item>
-            </template>
-            <template v-slot:selection="{ active, item, attrs, on }">
-              <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-0">
-                <v-list-item-icon class="mx-0 mr-1">
-                  <v-img
-                    v-if="item.image.small.includes('coingecko')"
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.small"
-                    class="my-auto"
-                  />
-                  <nuxt-img
-                    provider="cloudinary"
-                    v-else
-                    height="24"
-                    width="24"
-                    alt="cryptocurrency icon"
-                    :src="item.image.large"
-                    class="my-auto"
-                  />
-                </v-list-item-icon>
-                <v-list-item-content>
+                  </v-list-item-icon>
                   <v-list-item-title>
                     {{ item.symbol }}
                   </v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </template>
-          </v-select>
-        </v-col>
-        <v-col>
-          <v-text-field v-model="pair.coin2.amount" hide-details class="rounded-lg" type="number">
-            <template #label>
-              <span @click="pair.coin2.amount = wallet[pair.coin2.coin.id].amount" class="cursor-pointer">MAX</span>
-            </template>
-          </v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <v-btn class="rounded-lg" color="primary" block depressed large @click="swap" :disabled="loading">
-            <span class="font-normal">{{ $t("swap.swap") }}</span>
+                </v-list-item>
+              </template>
+            </v-select>
+          </v-col>
+          <v-col>
+            <v-text-field v-model="pair.coin1.amount" hide-details class="rounded-lg" type="number">
+              <template #label>
+                <span @click="pair.coin1.amount = wallet[pair.coin1.coin.id].amount" class="cursor-pointer">MAX</span>
+              </template>
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <div class="text-center mx-auto p-0 -my-3">
+          <v-btn
+            @click="swapCurrencies"
+            icon
+            x-large
+            class="mx-auto p-0 my-auto border-0"
+          >
+            <v-icon large>
+              mdi-swap-vertical
+            </v-icon>
           </v-btn>
-        </v-col>
-      </v-row>
-    </v-card-text>
-  </v-card>
+        </div>
+        <v-row dense>
+          <v-col>
+            <v-select :items="coin2coins" v-model="pair.coin2.coin" class="rounded-lg my-auto" solo hide-details>
+              <template v-slot:item="{ active, item, attrs, on }">
+                <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-1">
+                  <v-list-item-icon class="ml-0 mr-1">
+                    <v-img
+                      v-if="item.image.small.includes('coingecko')"
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.small"
+                      class="my-auto"
+                    />
+                    <nuxt-img
+                      provider="cloudinary"
+                      v-else
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.large"
+                      class="my-auto"
+                    />
+                  </v-list-item-icon>
+                  <v-list-item-title>
+                    {{ item.name }}
+                  </v-list-item-title>
+                </v-list-item>
+              </template>
+              <template v-slot:selection="{ active, item, attrs, on }">
+                <v-list-item v-on="on" v-bind="attrs" #default="{ active }" dense class="px-0">
+                  <v-list-item-icon class="mx-0 mr-1">
+                    <v-img
+                      v-if="item.image.small.includes('coingecko')"
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.small"
+                      class="my-auto"
+                    />
+                    <nuxt-img
+                      provider="cloudinary"
+                      v-else
+                      height="24"
+                      width="24"
+                      alt="cryptocurrency icon"
+                      :src="item.image.large"
+                      class="my-auto"
+                    />
+                  </v-list-item-icon>
+                  <v-list-item-content>
+                    <v-list-item-title>
+                      {{ item.symbol }}
+                    </v-list-item-title>
+                  </v-list-item-content>
+                </v-list-item>
+              </template>
+            </v-select>
+          </v-col>
+          <v-col>
+            <v-text-field v-model="pair.coin2.amount" hide-details class="rounded-lg" type="number">
+              <template #label>
+                <span @click="pair.coin2.amount = wallet[pair.coin2.coin.id].amount" class="cursor-pointer">MAX</span>
+              </template>
+            </v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-btn class="rounded-lg" color="primary" block depressed large @click="swap" :disabled="loading">
+              <span class="font-normal">{{ $t("swap.swap") }}</span>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+    <SwapConfirmationDialog v-if="transaction" :show="showConfirmation" :transaction="transaction" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -169,8 +172,6 @@ import SwapConfirmationDialog from "~/components/wallet/SwapConfirmationDialog.v
 import { Location } from "vue-router";
 
 const PullToRefresh = require("pulltorefreshjs");
-const CoinGecko = require("coingecko-api");
-const CoinGeckoClient = new CoinGecko();
 
 
 export default Vue.extend({
