@@ -82,7 +82,7 @@ export default Vue.extend({
   },
   methods: {
     confirmTransaction() {
-      this.$emit("transactionConfirmed", this.transaction);
+      this.$parent.$emit("transactionConfirmed", this.transaction);
     },
     registerTimer() {
       if (this.intervalId === 0) {
