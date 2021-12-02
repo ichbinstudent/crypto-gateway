@@ -11,6 +11,10 @@ export default defineNuxtConfig({
   target: "static",
   ssr: false,
 
+  bridge: {
+    nitro: false
+  },
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: "%s | CamerSwap",
