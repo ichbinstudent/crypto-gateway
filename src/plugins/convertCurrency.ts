@@ -15,11 +15,16 @@ export default (context: Context, inject: any) => {
       to = "eur";
     }
 
-    if (from === "xaf" && to === "eur") {
+    if (from == "xaf") {
       value = value.div(655.29);
+      from = "eur";
+    }
+
+    if (from === "eur" && to === "eur") {
+      return value;
     } else if (!["eur", "usd", "xaf"].includes(from)) {
-      let price = 0;
-      if (["eur", "usd", "xaf"].includes(to ?? '')) {
+      let price: number;
+      if (["eur", "usd", "xaf"].includes(to ?? "")) {
         price = context.store.getters["coins/coins"].filter(
           (coin: Coin) => coin.id === from.toLowerCase()
           // @ts-ignore
@@ -28,12 +33,12 @@ export default (context: Context, inject: any) => {
         price = context.store.getters["coins/coins"].filter(
           (coin: Coin) => coin.id === from.toLowerCase()
           // @ts-ignore
-        )[0]?.market_data.current_price['usd'];
+        )[0]?.market_data.current_price["usd"];
         const price2 = context.store.getters["coins/coins"].filter(
           (coin: Coin) => coin.id === to?.toLowerCase()
           // @ts-ignore
-        )[0]?.market_data.current_price['usd'];
-        price = price / price2
+        )[0]?.market_data.current_price["usd"];
+        price = price / price2;
       }
       value = value.mul(price);
     } else {
@@ -43,7 +48,7 @@ export default (context: Context, inject: any) => {
       )[0]?.market_data.current_price[from.toLowerCase()];
       value = value.div(price);
     }
-    return value
+    return value;
   };
 
 

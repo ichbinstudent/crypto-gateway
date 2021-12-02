@@ -67,7 +67,7 @@
         x-large
         fixed
         :ripple="false"
-        class="bottom-1"
+        class="bottom-0"
         prefetch
       >
         <v-icon color="background">mdi-swap-horizontal</v-icon>
@@ -139,8 +139,8 @@ div.v-app-bar-title__content {
 #floating-center-button {
   left: 50%;
   transform: translateX(-50%);
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
 .nav-btn-custom {

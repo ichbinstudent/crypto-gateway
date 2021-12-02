@@ -97,6 +97,10 @@ export default {
     }
   },
 
+  swap: {
+    swap: 'Swap'
+  },
+
   defaultLayout: {
     wallet: "Wallet",
     settings: "Settings"
