@@ -1,10 +1,12 @@
+import { defineNuxtConfig } from "@nuxt/bridge";
+
 process.env.NUXT_ENV_COMMIT_HASH = require("child_process")
   .execSync("git rev-parse --short HEAD")
   .toString()
   .trim();
 process.env.NUXT_ENV_VERSION = require("./package.json").version;
 
-export default {
+export default defineNuxtConfig({
   srcDir: "./src",
   target: "static",
   ssr: false,
@@ -25,7 +27,7 @@ export default {
         type: "text/css",
         href: "//fonts.googleapis.com/css?family=Maven+Pro"
       }
-    ],
+    ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -54,7 +56,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    "@nuxt/typescript-build",
     "@nuxtjs/moment",
     // https://github.com/whardier/nuxt-hero-icons
     // '@nuxtjs/google-fonts',
@@ -209,4 +210,4 @@ export default {
       baseURL: "https://res.cloudinary.com/dbiiwbqnv"
     }
   }
-};
+});
