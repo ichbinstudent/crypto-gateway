@@ -76,8 +76,9 @@ export const actions: ActionTree<State, State> = {
     context.commit("addFetching", "fetchCoinPrices", { root: true });
     return new Promise((resolve) => {
       return CoinGeckoClient.coins
-        .fetchMarketChart(args.symbol, {
-          days: args.days,
+        .fetchMarketChartRange(args.symbol, {
+          from: moment().subtract(args.days, "days").unix(),
+          to: moment().unix(),
           vs_currency: context.getters["settings/currency"]
         })
         .then((value: { data: { prices: number[][] } }) => {

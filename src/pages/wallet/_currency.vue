@@ -149,7 +149,15 @@
                     outlined
                     :label="$t('wallet._currency.withdrawAmount')"
                     v-model="withdrawalDetails.amount"
-                  />
+                  >
+                    <template #append class="my-auto">
+                        <span
+                          class="cursor-pointer border border-gray-700 active:border-primary rounded-lg p-1"
+                          @click="withdrawalDetails.amount = walletEntry.amount">
+                          MAX
+                        </span>
+                    </template>
+                  </v-text-field>
                 </v-col>
               </v-row>
               <v-row dense>
@@ -258,7 +266,7 @@ export default Vue.extend({
   },
   head() {
     return {
-      title: `${this.$t('wallet.wallet')} - ${(this as any).coin.name}`
+      title: `${this.$t("wallet.wallet")} - ${(this as any).coin.name}`
     };
   },
   computed: {
@@ -373,4 +381,15 @@ export default Vue.extend({
 #floating-card {
   margin-top: calc(4rem + 25vh + 2 * 36px + 28px);
 }
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 </style>
