@@ -3,8 +3,8 @@
     <v-card class="px-0 sm:px-2 py-2 mx-auto rounded-lg" flat max-width="600">
       <v-card-title class="mb-4">
         <v-btn-toggle color="primary" class="mx-auto" v-model="view" mandatory denseq rounded>
-          <v-btn value="signin" v-text="$t('auth.signInBtn')" />
-          <v-btn value="signup" v-text="$t('auth.signUpBtn')" />
+          <v-btn value="signin" v-text="$t('auth.signInBtn')"/>
+          <v-btn value="signup" v-text="$t('auth.signUpBtn')"/>
         </v-btn-toggle>
       </v-card-title>
       <v-card-text v-if="view === 'signin'">
@@ -37,10 +37,18 @@
                  :loading="loading"
                  v-text="$t('auth.signInBtn')"
           />
+          <v-btn block
+                 color="accent"
+                 large
+                 @click="signInUsingDemoAccount"
+                 :loading="loading"
+                 v-text="$t('auth.signInUsingDemoAccountBtn')"
+                 class="mt-2"
+          />
 
           <div class="text-overline text-uppercase mt-3 text-center">
             <v-responsive max-width="280" class="mx-auto">
-              <span v-html="$t('auth.termsAndPrivacySignIn')" />
+              <span v-html="$t('auth.termsAndPrivacySignIn')"/>
             </v-responsive>
           </div>
         </v-form>
@@ -99,10 +107,10 @@
           />
           <v-checkbox v-model="new_credentials.terms_and_privacy" dense aria-required="true">
             <template #label>
-              <div v-html="$t('auth.termsAndPrivacySignUp')" />
+              <div v-html="$t('auth.termsAndPrivacySignUp')"/>
             </template>
           </v-checkbox>
-          <v-btn block class="primary" large type="submit" :disabled="!signup_valid" v-text="$t('auth.signUpBtn')" />
+          <v-btn block class="primary" large type="submit" :disabled="!signup_valid" v-text="$t('auth.signUpBtn')"/>
         </v-form>
         <v-form @submit.prevent="smsVerification" v-model="signup2_valid" v-else-if="signupStep === 1">
           <v-text-field
@@ -131,11 +139,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Snack } from "~/types/interfaces";
+import {Snack} from "~/types/interfaces";
 import rules from "./rules";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue";
-import { MetaInfo } from "vue-meta/types";
+import {MetaInfo} from "vue-meta/types";
 
 interface Phone {
   number: any;
@@ -144,7 +152,7 @@ interface Phone {
 }
 
 export default Vue.extend({
-  components: { VueTelInputVuetify },
+  components: {VueTelInputVuetify},
   auth: "guest",
   data() {
     return {
@@ -183,10 +191,10 @@ export default Vue.extend({
     })
   },
   methods: {
-    onNumberSignInInput(_: string, { number }: Phone): void {
+    onNumberSignInInput(_: string, {number}: Phone): void {
       this.credentials.phone = number.international;
     },
-    onNumberSignUpInput(_: string, { number }: Phone): void {
+    onNumberSignUpInput(_: string, {number}: Phone): void {
       this.new_credentials.phone = number.international;
     },
     same_password_rule(v: String): string | boolean {
@@ -198,13 +206,13 @@ export default Vue.extend({
         password: this.credentials.password
       };
       this.loading = true;
-      this.$auth.loginWith("custom", { data: credentials })
+      this.$auth.loginWith("custom", {data: credentials})
         .then(() => {
           this.$store.dispatch("wallet/updateWallet")
           this.$router.push(this.localePath({name: 'wallet'}))
         })
         .catch(() => {
-          this.$store.commit("snackbar/setSnack", { message: "Invalid credentials", color: "error", icon: "error" });
+          this.$store.commit("snackbar/setSnack", {message: "Invalid credentials", color: "error", icon: "error"});
         })
         .finally(() => this.loading = false);
     },
@@ -214,8 +222,8 @@ export default Vue.extend({
         phone: this.signupPhone,
         code: this.smsCode
       }).then(() => {
-        this.$store.commit("snackbar/setSnack", { message: "Verification successful. You can log in now!" });
-        this.$store.commit("settings/setSignupState", { step: 0, phone: "" });
+        this.$store.commit("snackbar/setSnack", {message: "Verification successful. You can log in now!"});
+        this.$store.commit("settings/setSignupState", {step: 0, phone: ""});
         this.view = "signin";
       }).finally(() => this.loading = false);
     },
@@ -238,11 +246,11 @@ export default Vue.extend({
       this.loading = true;
       this.$axios.post("/auth/user/", credentials)
         .then(() => {
-          this.$store.commit("snackbar/setSnack", { message: "A verification code was sent to your phone." });
+          this.$store.commit("snackbar/setSnack", {message: "A verification code was sent to your phone."});
           // TODO: Fix if phone verification works (change step: 0 to step: 1
-          this.$store.commit("settings/setSignupState", { step: 0, phone: credentials.username });
+          this.$store.commit("settings/setSignupState", {step: 0, phone: credentials.username});
           // TODO: Remove after phone verification works
-          this.$store.commit("snackbar/setSnack", { message: "Signup successful. You can log in now!" });
+          this.$store.commit("snackbar/setSnack", {message: "Signup successful. You can log in now!"});
           this.credentials.phone = this.new_credentials.phone;
           this.view = "signin";
         })
@@ -254,8 +262,13 @@ export default Vue.extend({
         .finally(() => this.loading = false);
     },
     cancelVerification(): void {
-      this.$store.commit("settings/setSignupState", { step: 0, phone: "" });
+      this.$store.commit("settings/setSignupState", {step: 0, phone: ""});
       this.view = "signin";
+    },
+    signInUsingDemoAccount(): void {
+      this.credentials.phone = "+1234567890";
+      this.credentials.password = "test1234!";
+      this.signIn();
     }
   }
 });

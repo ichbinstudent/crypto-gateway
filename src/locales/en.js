@@ -68,6 +68,7 @@ export default {
     repeatPassword: "Repeat the password",
     signInBtn: "Sign in",
     signUpBtn: "Sign up",
+    signInUsingDemoAccountBtn: "Sign in using a demo account",
 
     reset: {
       resetYourPassword: "Reset your password",
