@@ -8,11 +8,10 @@ process.env.NUXT_ENV_VERSION = require("./package.json").version;
 
 export default defineNuxtConfig({
   srcDir: "./src",
-  target: "static",
   ssr: false,
 
   bridge: {
-    nitro: false
+    // nitro: false
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
