@@ -108,12 +108,6 @@ export default Vue.extend({
       })
         .catch(rejectDelay);
     }
-    // p = p.then(processResult).catch(errorHandler)
-
-    // const element = document.getElementsByClassName("_78cfbf41 _38544cae")[0] as any;
-    // if (element) {
-    //   element.style.display = "none";
-    // }
 
     if (this.$auth.loggedIn) {
       (window as any).$crisp.push(["set", "user:phone", [this.$auth.user?.username]]);
