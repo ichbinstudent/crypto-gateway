@@ -92,3 +92,4 @@ sw.*
 .vercel
 .output
 _nuxt
+/localazy.json

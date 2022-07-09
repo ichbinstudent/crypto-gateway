@@ -8,7 +8,7 @@ const CoinGeckoClient = new CoinGecko();
 
 export const state = () => ({
   coins: [] as Coin[],
-  availableForTrading: ["eur", "xaf", "cardano", "ripple", "ethereum", "tether", "terra-luna", "bitcoin", "solana"],
+  availableForTrading: ["eur", "xaf", "cardano", "ripple", "ethereum", "tether", "bitcoin", "solana"],
   networks: ["Binance Smart Chain", "Cardano", "Ethereum", "Ripple", "Luna", "Bitcoin", "MTN", "Orange"]
 });
 
