@@ -1,6 +1,6 @@
 <template>
   <div id="main-container">
-    <v-card class="rounded-lg mx-1" id="swap-card">
+    <v-card class="rounded-lg" id="swap-card">
       <v-card-title>
         {{ $t("swap.swap") }}
       </v-card-title>
@@ -335,9 +335,12 @@ export default Vue.extend({
 
 <style>
 #swap-card {
+  width: 100%;
+  max-width: 24em;
   position: absolute;
-  top: 50%;
-  transform: translatey(-50%);
+  top: 40%;
+  transform: translateY(-50%) translateX(-50%);
+  left: 50%;
 }
 
 input[type=number] {

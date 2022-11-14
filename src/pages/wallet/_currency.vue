@@ -42,7 +42,7 @@
     </div>
 
     <v-card
-      class="mx-0 mb-0 pb-0 rounded-t-xl h-screen relative"
+      class="mx-0 -mb-10 pb-0 rounded-t-xl min-h-screen relative"
       id="floating-card"
     >
       <v-card-title class="py-0 pt-2"><span
