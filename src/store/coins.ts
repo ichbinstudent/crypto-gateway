@@ -7,6 +7,8 @@ import CoinGecko from "coingecko-api";
 const CoinGeckoClient = new CoinGecko();
 const CoinGeckoApiKey = 'CG-E6TNwDjPScbypAGGk9JpQdPQ';
 
+const CoinList = ["cardano", "ripple", "ethereum", "tether", "bitcoin", "solana"];
+
 export const state = () => ({
   coins: [] as Coin[],
   availableForTrading: ["eur", "xaf", "cardano", "ripple", "ethereum", "tether", "bitcoin", "solana"],
@@ -31,43 +33,44 @@ export const mutations: MutationTree<State> = {
 export const actions: ActionTree<State, State> = {
   fetchCoins(context) {
     context.commit("addFetching", "fetchCoins", { root: true });
-    return new Promise((resolve, reject) => {
-      CoinGeckoClient.coins.all({x_cg_demo_api_key: CoinGeckoApiKey})
-        .then((value: { data: Coin[] }) => {
-          value.data.push({
-            symbol: "eur",
-            image: {
-              large: "/crypto-icons/128/color/eur.png",
-              small: "/crypto-icons/32/color/eur.png",
-              thumb: "/crypto-icons/32/color/eur.png"
-            },
-            id: "eur",
-            name: "Euro",
-            market_data: null as unknown as MarketData,
-            block_time_in_minutes: "0",
-            last_updated: moment().toDate(),
-            localization: (() => "Euro") as unknown as Localization
-          });
-          value.data.push({
-            symbol: "xaf",
-            image: {
-              large: "/crypto-icons/128/color/xaf.png",
-              small: "/crypto-icons/32/color/xaf.png",
-              thumb: "/crypto-icons/32/color/xaf.png"
-            },
-            id: "xaf",
-            name: "FCFA",
-            market_data: null as unknown as MarketData,
-            block_time_in_minutes: "0",
-            last_updated: moment().toDate(),
-            localization: (() => "FCFA") as unknown as Localization
-          });
+    return new Promise(async (resolve, reject) => {
+      const data: Coin[] = [];
 
-          context.commit("setCoins", value.data.filter((coin: Coin) => context.state.availableForTrading.includes(coin.id)));
-          resolve(value.data);
-        })
-        .catch((e: Error) => reject(e))
-        .finally(() => context.commit("removeFetching", "fetchCoins", { root: true }));
+      CoinList.forEach(async coinId => {
+        data.push((await CoinGeckoClient.coins.fetch(coinId, {x_cg_demo_api_key: CoinGeckoApiKey})).data);
+      });
+      data.push({
+        symbol: "eur",
+        image: {
+          large: "/crypto-icons/128/color/eur.png",
+          small: "/crypto-icons/32/color/eur.png",
+          thumb: "/crypto-icons/32/color/eur.png"
+        },
+        id: "eur",
+        name: "Euro",
+        market_data: null as unknown as MarketData,
+        block_time_in_minutes: "0",
+        last_updated: moment().toDate(),
+        localization: (() => "Euro") as unknown as Localization
+      });
+      data.push({
+        symbol: "xaf",
+        image: {
+          large: "/crypto-icons/128/color/xaf.png",
+          small: "/crypto-icons/32/color/xaf.png",
+          thumb: "/crypto-icons/32/color/xaf.png"
+        },
+        id: "xaf",
+        name: "FCFA",
+        market_data: null as unknown as MarketData,
+        block_time_in_minutes: "0",
+        last_updated: moment().toDate(),
+        localization: (() => "FCFA") as unknown as Localization
+      });
+
+      context.commit("setCoins", data.filter((coin: Coin) => context.state.availableForTrading.includes(coin.id)));
+      resolve(data);
+      context.commit("removeFetching", "fetchCoins", { root: true });
     });
   },
   fetchCoinPrices(
