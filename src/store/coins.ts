@@ -5,6 +5,7 @@ import moment from "moment";
 import CoinGecko from "coingecko-api";
 
 const CoinGeckoClient = new CoinGecko();
+const CoinGeckoApiKey = 'CG-E6TNwDjPScbypAGGk9JpQdPQ';
 
 export const state = () => ({
   coins: [] as Coin[],
@@ -31,7 +32,7 @@ export const actions: ActionTree<State, State> = {
   fetchCoins(context) {
     context.commit("addFetching", "fetchCoins", { root: true });
     return new Promise((resolve, reject) => {
-      CoinGeckoClient.coins.all()
+      CoinGeckoClient.coins.all({x_cg_demo_api_key: CoinGeckoApiKey})
         .then((value: { data: Coin[] }) => {
           value.data.push({
             symbol: "eur",
@@ -79,7 +80,8 @@ export const actions: ActionTree<State, State> = {
         .fetchMarketChartRange(args.symbol, {
           from: moment().subtract(args.days, "days").unix(),
           to: moment().unix(),
-          vs_currency: context.getters["settings/currency"]
+          vs_currency: context.getters["settings/currency"],
+          x_cg_demo_api_key: CoinGeckoApiKey
         })
         .then((value: { data: { prices: number[][] } }) => {
           resolve(value.data.prices);
