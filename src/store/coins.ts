@@ -36,9 +36,10 @@ export const actions: ActionTree<State, State> = {
     return new Promise(async (resolve, reject) => {
       const data: Coin[] = [];
 
-      CoinList.forEach(async coinId => {
-        data.push((await CoinGeckoClient.coins.fetch(coinId, {x_cg_demo_api_key: CoinGeckoApiKey})).data);
-      });
+      for (const coinId of CoinList) {
+        let coinDetails = await CoinGeckoClient.coins.fetch(coinId, {x_cg_demo_api_key: CoinGeckoApiKey});
+        data.push(coinDetails.data);
+      }
       data.push({
         symbol: "eur",
         image: {
